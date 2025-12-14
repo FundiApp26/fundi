@@ -4,7 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fundi - Gestion numérique des tontines</title>
-  <meta name="description" content="Fundi permet la gestion numérique des tontines à travers des profils pour établir la crédibilité des participants.">
+  <meta name="description" content="Fundi permet la gestion numérique des tontines à travers des profils pour établir la crédibilité des participants, l'automatisation des cotisations individuelles et de leur suivi.">
+  <meta name="keywords" content="tontine, épargne, cotisation, mobile money, OM, MOMO, Cameroun, Afrique, gestion financière">
+  <meta name="author" content="SEED SARL">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2D5A27">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fundi.app/">
+  <meta property="og:title" content="Fundi - Gestion numérique des tontines">
+  <meta property="og:description" content="Gérez facilement vos tontines, en toute sécurité sur votre mobile. Épargnez et financez vos activités grâce aux tontines en ligne.">
+  <meta property="og:image" content="assets/Common safe@2x.png">
+  <meta property="og:locale" content="fr_FR">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://fundi.app/">
+  <meta name="twitter:title" content="Fundi - Gestion numérique des tontines">
+  <meta name="twitter:description" content="Gérez facilement vos tontines, en toute sécurité sur votre mobile. Épargnez et financez vos activités grâce aux tontines en ligne.">
+  <meta name="twitter:image" content="assets/Common safe@2x.png">
+
+  <!-- Favicon (à remplacer par le vrai favicon) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/output.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +36,7 @@
 </head>
 <body class="font-sans text-fundi-dark">
   <!-- Navbar -->
-  <nav class="fixed top-0 left-0 right-0 bg-fundi-green z-50">
+  <nav class="fixed top-0 left-0 right-0 bg-fundi-green z-50 navbar-shrink">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16 md:h-20">
         <!-- Logo -->
@@ -39,7 +63,7 @@
 
         <!-- CTA & Language -->
         <div class="hidden lg:flex items-center space-x-4">
-          <a href="#" class="inline-flex items-center space-x-2 bg-white text-fundi-green font-opensans font-semibold py-2.5 px-5 rounded-full text-sm uppercase hover:bg-gray-100 transition-colors">
+          <a href="#" class="inline-flex items-center space-x-2 bg-white text-fundi-green font-opensans font-semibold py-2.5 px-5 rounded-full text-sm uppercase hover:bg-gray-100 transition-colors btn-hover">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
             </svg>
@@ -105,10 +129,10 @@
             <strong class="font-bold" data-i18n="hero_subtitle_bold"> crédibilité</strong><span data-i18n="hero_subtitle_2">, vérifiez celle des membres de vos tontines.</span>
           </p>
           <div class="mt-8 flex flex-row gap-4 justify-center lg:justify-start">
-            <a href="#" class="inline-block">
+            <a href="#" class="inline-block animate-pulse-soft">
               <img src="assets/app-store.svg" alt="App Store" class="h-10 md:h-12">
             </a>
-            <a href="#" class="inline-block">
+            <a href="#" class="inline-block animate-pulse-soft">
               <img src="assets/google-play.svg" alt="Google Play" class="h-10 md:h-12">
             </a>
           </div>
@@ -154,7 +178,7 @@
   <section id="about" class="py-16 md:py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
-      <div class="text-center mb-16">
+      <div class="text-center mb-16 animate-on-scroll">
         <span class="text-fundi-orange font-opensans uppercase text-[12px] md:text-[16px] tracking-wider" data-i18n="about_label">À propos</span>
         <h2 class="font-candara font-bold mt-2 text-[38px] md:text-[53px] text-fundi-dark" data-i18n="about_title">Fundi</h2>
         <!-- Barre sous Fundi -->
@@ -167,7 +191,7 @@
       <!-- Features Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mt-12">
         <!-- Feature 1 -->
-        <div class="text-center">
+        <div class="text-center animate-scale delay-100">
           <div class="mx-auto flex items-center justify-center mb-6">
             <img src="assets/skills.png" alt="Historique" class="w-16 h-16 md:w-24 md:h-24 object-contain">
           </div>
@@ -175,15 +199,15 @@
         </div>
 
         <!-- Feature 2 -->
-        <div class="text-center">
+        <div class="text-center animate-scale delay-200">
           <div class="mx-auto flex items-center justify-center mb-6">
             <img src="assets/clipboard.png" alt="Vérifier" class="w-16 h-16 md:w-24 md:h-24 object-contain">
           </div>
-          <p class="font-opensans font-semibold text-[14px] md:text-[16px] leading-relaxed" style="color: #4C504A;" data-i18n="about_feature_2_desc">Vérifiez les listes qui se cochent automatiquement après chaque dépôt</p>
+          <p class="font-opensans font-semibold text-[14px] md:text-[16px] leading-relaxed" style="color: #4C504A;" data-i18n="about_feature_4_desc">Vérifiez les listes qui se cochent automatiquement après chaque dépôt</p>
         </div>
 
         <!-- Feature 3 -->
-        <div class="text-center">
+        <div class="text-center animate-scale delay-300">
           <div class="mx-auto flex items-center justify-center mb-6">
             <img src="assets/processing.png" alt="Cotiser" class="w-16 h-16 md:w-24 md:h-24 object-contain">
           </div>
@@ -191,7 +215,7 @@
         </div>
 
         <!-- Feature 4 -->
-        <div class="text-center">
+        <div class="text-center animate-scale delay-400">
           <div class="mx-auto flex items-center justify-center mb-6">
             <img src="assets/receive.png" alt="Argent" class="w-16 h-16 md:w-24 md:h-24 object-contain">
           </div>
@@ -218,7 +242,7 @@
       <!-- Content positioned on top of wave -->
       <div class="absolute inset-0 z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-24">
-          <div class="lg:w-1/2 text-center lg:text-left">
+          <div class="lg:w-1/2 text-center lg:text-left animate-from-left">
             <h2 class="font-candara font-bold uppercase text-[24px] md:text-[40px]" style="color: #0A0A0A;" data-i18n="how_title">Comment ça marche ?</h2>
             <div class="w-40 md:w-56 h-1 bg-fundi-orange mt-2 mx-auto lg:mx-0 rounded-full"></div>
             <p class="mt-4 font-opensans text-[14px] md:text-[18px]" style="color: #4C504A;" data-i18n="how_description">
@@ -270,7 +294,7 @@
     <section id="premium" class="relative z-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-20 lg:pt-16 pb-16 md:pb-24">
         <!-- Title centered -->
-        <h2 class="font-candara font-bold uppercase text-[28px] md:text-[40px] text-center text-white mb-12">
+        <h2 class="font-candara font-bold uppercase text-[28px] md:text-[40px] text-center text-white mb-12 animate-on-scroll">
           <span data-i18n="premium_title_1">Avantages</span>
           <span class="text-fundi-orange" data-i18n="premium_title_2"> Prémium</span>
         </h2>
@@ -278,7 +302,7 @@
         <!-- Features on single row -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-white">
           <!-- Premium Feature 1 -->
-          <div class="text-center">
+          <div class="text-center animate-scale delay-100">
             <div class="mx-auto mb-4">
               <img src="assets/score@2x.png" alt="Score" class="w-14 h-14 md:w-20 md:h-20 mx-auto object-contain">
             </div>
@@ -286,7 +310,7 @@
           </div>
 
           <!-- Premium Feature 2 -->
-          <div class="text-center">
+          <div class="text-center animate-scale delay-200">
             <div class="mx-auto mb-4">
               <img src="assets/user@2x.png" alt="Cotisations" class="w-14 h-14 md:w-20 md:h-20 mx-auto object-contain">
             </div>
@@ -294,7 +318,7 @@
           </div>
 
           <!-- Premium Feature 3 -->
-          <div class="text-center">
+          <div class="text-center animate-scale delay-300">
             <div class="mx-auto mb-4">
               <img src="assets/transaction@2x.png" alt="Transactions" class="w-14 h-14 md:w-20 md:h-20 mx-auto object-contain">
             </div>
@@ -302,7 +326,7 @@
           </div>
 
           <!-- Premium Feature 4 -->
-          <div class="text-center">
+          <div class="text-center animate-scale delay-400">
             <div class="mx-auto mb-4">
               <img src="assets/Groupe 2678@2x.png" alt="No Ads" class="w-14 h-14 md:w-20 md:h-20 mx-auto object-contain">
             </div>
@@ -313,7 +337,7 @@
     </section>
 
     <!-- Phones floating over both sections (desktop only) -->
-    <div class="hidden lg:block absolute right-[10%] xl:right-[15%] top-[120px] z-40">
+    <div class="hidden lg:block absolute right-[10%] xl:right-[15%] top-[120px] z-40 animate-float">
       <img src="assets/Common safe@2x.png" alt="Fundi App" class="w-[420px] xl:w-[480px] drop-shadow-2xl">
     </div>
   </div>
@@ -322,7 +346,7 @@
   <section id="faq" class="py-16 md:py-24 bg-[#F5F5F5]" style="background-image: url('assets/bg_hero.png'); background-size: cover;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
-      <div class="text-center mb-12">
+      <div class="text-center mb-12 animate-on-scroll">
         <h2 class="font-candara font-bold text-[32px] md:text-[40px] text-fundi-dark" data-i18n="faq_title">FAQ</h2>
         <div class="w-12 h-1 bg-fundi-orange mx-auto mt-2 rounded-full"></div>
         <p class="mt-6 text-[16px] md:text-[18px] text-gray-600 max-w-2xl mx-auto font-opensans" data-i18n="faq_description">
@@ -332,7 +356,7 @@
 
       <div class="grid md:grid-cols-2 gap-8 items-start">
         <!-- FAQ Accordion -->
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden p-8">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden p-8 animate-from-left">
           <!-- FAQ Item 1 -->
           <div class="faq-item border-b border-gray-200">
             <button class="faq-toggle w-full px-8 py-5 text-left flex justify-between items-center">
@@ -400,14 +424,14 @@
         </div>
 
         <!-- Contact Form -->
-         <div class="bg-fundi-green" style="box-shadow: 0px 0px 28px #A6A6A628; border-radius: 6px; background-image: url('assets/pattern-shape-1@2x.png'); background-size: cover;">
+         <div class="bg-fundi-green animate-from-right" style="box-shadow: 0px 0px 28px #A6A6A628; border-radius: 6px; background-image: url('assets/pattern-shape-1@2x.png'); background-size: cover;">
             <div class="p-8 text-white relative overflow-hidden">
               <h3 class="text-[20px] md:text-[24px] font-bold font-opensans leading-tight relative z-10" data-i18n="faq_contact_title">Vous n'avez pas trouvé réponse à vos questions ?</h3>
-              <form class="mt-6 space-y-4 relative z-10">
-                <input type="text" class="w-full px-5 py-3 rounded-[4px] bg-white text-gray-700 placeholder-gray-400 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-fundi-orange" data-i18n-placeholder="faq_form_name" placeholder="Votre nom">
-                <input type="email" class="w-full px-5 py-3 rounded-[4px] bg-white text-gray-700 placeholder-gray-400 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-fundi-orange" data-i18n-placeholder="faq_form_email" placeholder="Votre email">
-                <textarea rows="5" class="w-full px-5 py-3 rounded-[4px] bg-white text-gray-700 placeholder-gray-400 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-fundi-orange resize-none" data-i18n-placeholder="faq_form_question" placeholder="Posez votre question ici"></textarea>
-                <button type="submit" class="w-full bg-fundi-orange hover:bg-fundi-green text-white font-normal py-3 px-6 rounded-[3px] transition-colors font-opensans" data-i18n="faq_form_submit">Envoyer votre message</button>
+              <form id="contact-form" class="mt-6 space-y-4 relative z-10">
+                <input type="text" id="contact-name" required class="w-full px-5 py-3 rounded-[4px] bg-white text-gray-700 placeholder-gray-400 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-fundi-orange" data-i18n-placeholder="faq_form_name" placeholder="Votre nom">
+                <input type="email" id="contact-email" required class="w-full px-5 py-3 rounded-[4px] bg-white text-gray-700 placeholder-gray-400 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-fundi-orange" data-i18n-placeholder="faq_form_email" placeholder="Votre email">
+                <textarea rows="5" id="contact-message" required class="w-full px-5 py-3 rounded-[4px] bg-white text-gray-700 placeholder-gray-400 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-fundi-orange resize-none" data-i18n-placeholder="faq_form_question" placeholder="Posez votre question ici"></textarea>
+                <button type="submit" class="w-full bg-fundi-orange hover:bg-fundi-green text-white font-normal py-3 px-6 rounded-[3px] transition-colors font-opensans btn-hover" data-i18n="faq_form_submit">Envoyer votre message</button>
               </form>
           </div>
          </div>
@@ -420,14 +444,14 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         <!-- Content -->
-        <div class="py-8 text-center lg:text-left">
+        <div class="py-8 text-center lg:text-left animate-on-scroll">
           <h2 class="text-2xl md:text-2xl font-bold" data-i18n="cta_title">Gérez facilement vos tontines, en toute sécurité sur votre mobile</h2>
           <p class="mt-4 text-white/90" data-i18n="cta_description">There are many variations of passages of Lorem Ipsum available, but the majority have suffered.</p>
           <div class="mt-8 flex flex-row gap-4 justify-center lg:justify-start">
-            <a href="#" class="inline-block">
+            <a href="#" class="inline-block animate-pulse-soft">
               <img src="assets/app-store.svg" alt="App Store" class="h-10 md:h-12">
             </a>
-            <a href="#" class="inline-block">
+            <a href="#" class="inline-block animate-pulse-soft">
               <img src="assets/google-play.svg" alt="Google Play" class="h-10 md:h-12">
             </a>
           </div>
@@ -557,6 +581,59 @@
       });
     });
 
+    // Contact form submission with mailto
+    const contactForm = document.getElementById('contact-form');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const message = document.getElementById('contact-message').value;
+
+      const subject = encodeURIComponent('Question Fundi - ' + name);
+      const body = encodeURIComponent('Nom: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message);
+
+      window.location.href = 'mailto:fundiapp26@gmail.com?subject=' + subject + '&body=' + body;
+    });
+
+    // Scroll animations with Intersection Observer
+    const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-from-left, .animate-from-right, .animate-scale');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '50px',
+      threshold: 0.1
+    };
+
+    const animationObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    animatedElements.forEach(el => {
+      // Check if element is already in viewport on page load
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('visible');
+      } else {
+        animationObserver.observe(el);
+      }
+    });
+
+    // Navbar shrink on scroll
+    const navbar = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
     // Active section detection
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link[data-section]');
@@ -590,22 +667,22 @@
     }
 
     // Intersection Observer for scroll detection
-    const observerOptions = {
+    const navObserverOptions = {
       root: null,
       rootMargin: '-20% 0px -60% 0px',
       threshold: 0
     };
 
-    const observer = new IntersectionObserver((entries) => {
+    const navObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           setActiveNav(entry.target.id);
         }
       });
-    }, observerOptions);
+    }, navObserverOptions);
 
     sections.forEach(section => {
-      observer.observe(section);
+      navObserver.observe(section);
     });
 
     // Also update on click
