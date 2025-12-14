@@ -201,23 +201,12 @@
     </div>
   </section>
 
-  <!-- How it Works + Premium Container -->
+  <!-- How it Works + Premium Wrapper -->
   <div class="relative">
-    <!-- Background image that spans both sections -->
-    <div class="absolute inset-0 z-0" style="top: 200px;">
-      <img src="assets/bg_how_it_works_2.png" alt="" class="w-full h-full object-cover">
-      <!-- Dark overlay -->
-      <div class="absolute inset-0 bg-black/40"></div>
-    </div>
-
-    <!-- How it Works Section -->
-    <section id="how-it-works" class="pt-16 md:pt-24 pb-32 md:pb-48 bg-white relative z-10">
-      <!-- SVG Wave at bottom -->
-      <img src="assets/bg_how_it_works.svg" alt="" class="absolute bottom-0 left-0 w-full h-auto z-20" style="transform: translateY(50%);">
-
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="md:w-1/2">
-          <!-- Content -->
+    <!-- Sub-section 1: Comment ça marche (fond blanc) -->
+    <section id="how-it-works" class="relative z-10 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24 pb-8">
+        <div class="lg:w-1/2">
           <h2 class="font-candara font-bold uppercase text-[28px] md:text-[40px]" style="color: #0A0A0A;" data-i18n="how_title">Comment ça marche ?</h2>
           <div class="w-20 h-1 bg-fundi-orange mt-2"></div>
           <p class="mt-4 font-opensans text-[16px] md:text-[18px]" style="color: #4C504A;" data-i18n="how_description">
@@ -227,41 +216,42 @@
           <div class="mt-8 space-y-5">
             <!-- Step 1 -->
             <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0 w-6 h-6 bg-fundi-orange rounded-full flex items-center justify-center">
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                </svg>
-              </div>
+              <div class="flex-shrink-0 w-5 h-5 bg-fundi-orange rounded-full"></div>
               <p class="font-opensans text-[15px] md:text-[17px]" style="color: #4C504A;" data-i18n="how_step_1">Téléchargez l'application sur Play Store ou app store</p>
             </div>
 
             <!-- Step 2 -->
             <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0 w-6 h-6 bg-fundi-orange rounded-full flex items-center justify-center">
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                </svg>
-              </div>
+              <div class="flex-shrink-0 w-5 h-5 bg-fundi-orange rounded-full"></div>
               <p class="font-opensans text-[15px] md:text-[17px]" style="color: #4C504A;" data-i18n="how_step_2">Créez votre compte et enregistrez vos numéros OM et MOMO</p>
             </div>
 
             <!-- Step 3 -->
             <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0 w-6 h-6 bg-fundi-orange rounded-full flex items-center justify-center">
-                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
-                </svg>
-              </div>
+              <div class="flex-shrink-0 w-5 h-5 bg-fundi-orange rounded-full"></div>
               <p class="font-opensans text-[15px] md:text-[17px]" style="color: #4C504A;" data-i18n="how_step_3">Créer votre cotisation, ou rejoignez en une</p>
             </div>
           </div>
         </div>
       </div>
+      <!-- SVG Wave at bottom of How it Works -->
+      <div class="relative h-24 md:h-32">
+        <svg class="absolute bottom-0 left-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 1920 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 100V30C200 80 400 100 600 80C800 60 1000 20 1200 10C1400 0 1600 20 1920 50V100H0Z" fill="white"/>
+        </svg>
+      </div>
     </section>
 
-    <!-- Premium Section -->
-    <section id="premium" class="pt-8 md:pt-16 pb-16 md:pb-24 relative z-20">
-      <div class="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-16">
+    <!-- Sub-section 2: Avantages Premium (fond = image famille + overlay) -->
+    <section id="premium" class="relative">
+      <!-- Background image -->
+      <div class="absolute inset-0 z-0">
+        <img src="assets/bg_how_it_works_2.png" alt="" class="w-full h-full object-cover object-top">
+        <div class="absolute inset-0 bg-black/50"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24 pb-16 md:pb-24">
         <!-- Title centered -->
         <h2 class="font-candara font-bold uppercase text-[28px] md:text-[40px] text-center text-white mb-12">
           <span data-i18n="premium_title_1">Avantages</span>
@@ -305,14 +295,9 @@
       </div>
     </section>
 
-    <!-- Phones floating over both sections -->
-    <div class="hidden md:block absolute right-[5%] lg:right-[8%] top-8 z-40">
-      <img src="assets/Common safe@2x.png" alt="Fundi App" class="w-72 lg:w-80 xl:w-96 drop-shadow-2xl">
-    </div>
-
-    <!-- Mobile phones (visible only on mobile) -->
-    <div class="md:hidden absolute top-4 right-4 z-40">
-      <img src="assets/Common safe@2x.png" alt="Fundi App" class="w-40 drop-shadow-xl">
+    <!-- Phones floating over both sections (desktop only) -->
+    <div class="hidden lg:block absolute right-[8%] xl:right-[12%] top-8 z-40">
+      <img src="assets/Common safe@2x.png" alt="Fundi App" class="w-80 xl:w-96 drop-shadow-2xl">
     </div>
   </div>
 
