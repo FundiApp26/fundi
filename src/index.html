@@ -203,55 +203,72 @@
 
   <!-- How it Works + Premium Wrapper -->
   <div class="relative">
-    <!-- Sub-section 1: Comment ça marche (fond blanc) -->
-    <section id="how-it-works" class="relative z-10 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24 pb-8">
-        <div class="lg:w-1/2">
-          <h2 class="font-candara font-bold uppercase text-[28px] md:text-[40px]" style="color: #0A0A0A;" data-i18n="how_title">Comment ça marche ?</h2>
-          <div class="w-20 h-1 bg-fundi-orange mt-2"></div>
-          <p class="mt-4 font-opensans text-[16px] md:text-[18px]" style="color: #4C504A;" data-i18n="how_description">
-            Fundi est disponible pour toute personne majeure, souhaitant épargner, ou financer ses activités grâce aux tontines en ligne.
-          </p>
+    <!-- Background: image famille + overlay (couvre tout le wrapper) -->
+    <div class="absolute inset-0 z-0">
+      <img src="assets/bg_how_it_works_2.png" alt="" class="w-full h-full object-cover object-top">
+      <div class="absolute inset-0 bg-black/60"></div>
+    </div>
 
-          <div class="mt-8 space-y-5">
-            <!-- Step 1 -->
-            <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0 w-5 h-5 bg-fundi-orange rounded-full"></div>
-              <p class="font-opensans text-[15px] md:text-[17px]" style="color: #4C504A;" data-i18n="how_step_1">Téléchargez l'application sur Play Store ou app store</p>
+    <!-- Sub-section 1: Comment ça marche (vague blanche avec contenu) -->
+    <section id="how-it-works" class="relative z-10">
+      <!-- SVG Wave background - courbe concave : gauche bas, droite haut -->
+      <svg class="w-full min-h-[600px] md:min-h-[620px] lg:h-auto" viewBox="0 0 1920 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0H1920V420Q960 600 0 520V0Z" fill="#FAFAFA"/>
+      </svg>
+      <!-- Content positioned on top of wave -->
+      <div class="absolute inset-0 z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-24">
+          <div class="lg:w-1/2 text-center lg:text-left">
+            <h2 class="font-candara font-bold uppercase text-[24px] md:text-[40px]" style="color: #0A0A0A;" data-i18n="how_title">Comment ça marche ?</h2>
+            <div class="w-40 md:w-56 h-1 bg-fundi-orange mt-2 mx-auto lg:mx-0 rounded-full"></div>
+            <p class="mt-4 font-opensans text-[14px] md:text-[18px]" style="color: #4C504A;" data-i18n="how_description">
+              Fundi est disponible pour toute personne majeure, souhaitant épargner, ou financer ses activités grâce aux tontines en ligne.
+            </p>
+
+            <div class="mt-6 md:mt-8 space-y-4 md:space-y-5 text-left">
+              <!-- Step 1 -->
+              <div class="flex items-start space-x-3 md:space-x-4">
+                <div class="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 bg-fundi-orange rounded-full flex items-center justify-center mt-0.5">
+                  <svg class="w-3 h-3 md:w-4 md:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <p class="font-opensans text-[13px] md:text-[17px]" style="color: #4C504A;" data-i18n="how_step_1">Téléchargez l'application sur Play Store ou app store</p>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="flex items-start space-x-3 md:space-x-4">
+                <div class="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 bg-fundi-orange rounded-full flex items-center justify-center mt-0.5">
+                  <svg class="w-3 h-3 md:w-4 md:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <p class="font-opensans text-[13px] md:text-[17px]" style="color: #4C504A;" data-i18n="how_step_2">Créez votre compte et enregistrez vos numéros OM et MOMO</p>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="flex items-start space-x-3 md:space-x-4">
+                <div class="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 bg-fundi-orange rounded-full flex items-center justify-center mt-0.5">
+                  <svg class="w-3 h-3 md:w-4 md:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                <p class="font-opensans text-[13px] md:text-[17px]" style="color: #4C504A;" data-i18n="how_step_3">Créer votre cotisation, ou rejoignez en une</p>
+              </div>
             </div>
 
-            <!-- Step 2 -->
-            <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0 w-5 h-5 bg-fundi-orange rounded-full"></div>
-              <p class="font-opensans text-[15px] md:text-[17px]" style="color: #4C504A;" data-i18n="how_step_2">Créez votre compte et enregistrez vos numéros OM et MOMO</p>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="flex items-center space-x-4">
-              <div class="flex-shrink-0 w-5 h-5 bg-fundi-orange rounded-full"></div>
-              <p class="font-opensans text-[15px] md:text-[17px]" style="color: #4C504A;" data-i18n="how_step_3">Créer votre cotisation, ou rejoignez en une</p>
+            <!-- Mobile phones (visible on mobile/tablet only) -->
+            <div class="lg:hidden flex justify-center mt-4 md:mt-2">
+              <img src="assets/Common safe@2x.png" alt="Fundi App" class="w-[280px] md:w-[300px] drop-shadow-xl">
             </div>
           </div>
         </div>
       </div>
-      <!-- SVG Wave at bottom of How it Works -->
-      <div class="relative h-24 md:h-32">
-        <svg class="absolute bottom-0 left-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 1920 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 100V30C200 80 400 100 600 80C800 60 1000 20 1200 10C1400 0 1600 20 1920 50V100H0Z" fill="white"/>
-        </svg>
-      </div>
     </section>
 
-    <!-- Sub-section 2: Avantages Premium (fond = image famille + overlay) -->
-    <section id="premium" class="relative">
-      <!-- Background image -->
-      <div class="absolute inset-0 z-0">
-        <img src="assets/bg_how_it_works_2.png" alt="" class="w-full h-full object-cover object-top">
-        <div class="absolute inset-0 bg-black/50"></div>
-      </div>
-
-      <!-- Content -->
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24 pb-16 md:pb-24">
+    <!-- Sub-section 2: Avantages Premium (contenu sur fond transparent - le fond est dans le wrapper) -->
+    <section id="premium" class="relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-20 lg:pt-16 pb-16 md:pb-24">
         <!-- Title centered -->
         <h2 class="font-candara font-bold uppercase text-[28px] md:text-[40px] text-center text-white mb-12">
           <span data-i18n="premium_title_1">Avantages</span>
@@ -296,8 +313,8 @@
     </section>
 
     <!-- Phones floating over both sections (desktop only) -->
-    <div class="hidden lg:block absolute right-[8%] xl:right-[12%] top-8 z-40">
-      <img src="assets/Common safe@2x.png" alt="Fundi App" class="w-80 xl:w-96 drop-shadow-2xl">
+    <div class="hidden lg:block absolute right-[10%] xl:right-[15%] top-[120px] z-40">
+      <img src="assets/Common safe@2x.png" alt="Fundi App" class="w-[420px] xl:w-[480px] drop-shadow-2xl">
     </div>
   </div>
 
@@ -307,7 +324,7 @@
       <!-- Section Header -->
       <div class="text-center mb-12">
         <h2 class="font-candara font-bold text-[32px] md:text-[40px] text-fundi-dark" data-i18n="faq_title">FAQ</h2>
-        <div class="w-12 h-1 bg-fundi-orange mx-auto mt-2"></div>
+        <div class="w-12 h-1 bg-fundi-orange mx-auto mt-2 rounded-full"></div>
         <p class="mt-6 text-[16px] md:text-[18px] text-gray-600 max-w-2xl mx-auto font-opensans" data-i18n="faq_description">
           Voici la réponse à quelques questions que se posent les utilisateurs ou futurs utilisateurs de Fundi.
         </p>
