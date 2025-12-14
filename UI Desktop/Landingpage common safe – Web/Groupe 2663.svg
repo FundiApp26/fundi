@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="273" height="52" viewBox="0 0 273 52">
+  <g id="Groupe_2663" data-name="Groupe 2663" transform="translate(0.325)">
+    <rect id="Rectangle_2" data-name="Rectangle 2" width="273" height="52" rx="26" transform="translate(-0.325)" fill="#fff"/>
+    <g id="Groupe_2706" data-name="Groupe 2706" transform="translate(20 15.581)">
+      <text id="Telecharger_l_application" data-name="Telecharger l&apos;application" transform="translate(31.675 16.419)" fill="#53893d" font-size="14" font-family="OpenSans-Semibold, Open Sans" font-weight="600"><tspan x="0" y="0">TELECHARGER L&apos;APPLICATION</tspan></text>
+      <path id="download" d="M17.024,8.41h-3.4V1.6H9.08V8.41h-3.4l5.675,5.675L17.024,8.41Zm4.924,7.413c-.238-.254-1.829-1.956-2.283-2.4a1.707,1.707,0,0,0-1.182-.475H16.489l3.477,3.4H15.944a.311.311,0,0,0-.272.151l-.926,2.126H7.954L7.028,16.5a.312.312,0,0,0-.272-.151H2.733l3.476-3.4H4.216a1.708,1.708,0,0,0-1.182.475C2.58,13.869.99,15.57.751,15.823c-.555.592-.86,1.063-.715,1.644l.637,3.489a1.521,1.521,0,0,0,1.421,1.063H20.607a1.52,1.52,0,0,0,1.421-1.063l.637-3.489c.143-.582-.161-1.053-.717-1.644Z" transform="translate(0 -1.6)" fill="#53893d"/>
+    </g>
+  </g>
+</svg>

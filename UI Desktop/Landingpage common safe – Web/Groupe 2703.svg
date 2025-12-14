@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="506" height="190" viewBox="0 0 506 190">
+  <g id="Groupe_2703" data-name="Groupe 2703" transform="translate(-1070 -3107)">
+    <g id="Rectangle_43" data-name="Rectangle 43" transform="translate(1070 3107)" fill="#fff" stroke="rgba(128,128,128,0.87)" stroke-width="0.5">
+      <rect width="506" height="190" rx="4" stroke="none"/>
+      <rect x="0.25" y="0.25" width="505.5" height="189.5" rx="3.75" fill="none"/>
+    </g>
+    <text id="Posez_votre_question_ici" data-name="Posez votre question ici" transform="translate(1094 3144)" fill="gray" font-size="17" font-family="OpenSans-Light, Open Sans" font-weight="300"><tspan x="0" y="0">Posez votre question ici</tspan></text>
+  </g>
+</svg>

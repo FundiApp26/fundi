@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="506" height="50" viewBox="0 0 506 50">
+  <g id="Groupe_2701" data-name="Groupe 2701" transform="translate(-1070 -3034)">
+    <g id="Rectangle_41" data-name="Rectangle 41" transform="translate(1070 3034)" fill="#fff" stroke="rgba(128,128,128,0.87)" stroke-width="0.5">
+      <rect width="506" height="50" rx="4" stroke="none"/>
+      <rect x="0.25" y="0.25" width="505.5" height="49.5" rx="3.75" fill="none"/>
+    </g>
+    <text id="Votre_email" data-name="Votre email" transform="translate(1093 3066)" fill="gray" font-size="17" font-family="OpenSans-Light, Open Sans" font-weight="300"><tspan x="0" y="0">Votre email</tspan></text>
+  </g>
+</svg>

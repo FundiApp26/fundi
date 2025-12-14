@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@layer components {
+  .btn-primary {
+    @apply bg-fundi-orange hover:bg-fundi-orange-light text-white font-semibold py-3 px-6 rounded-full transition-colors duration-300;
+  }
+
+  .btn-secondary {
+    @apply bg-fundi-green hover:bg-fundi-green-light text-white font-semibold py-3 px-6 rounded-full transition-colors duration-300;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-fundi-dark;
+  }
+
+  .section-subtitle {
+    @apply text-gray-600 text-lg max-w-2xl mx-auto;
+  }
+}
+
+/* Hide elements based on language */
+[data-lang="en"] .lang-fr,
+[data-lang="fr"] .lang-en {
+  display: none;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* CTA Section background responsive */
+.cta-bg-map {
+  background-image: url('../assets/map@2x.png');
+  background-size: 200% auto;
+  background-position: 100% 20%;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 1024px) {
+  .cta-bg-map {
+    background-size: cover;
+    background-position: center;
+  }
+}
