@@ -1,0 +1,51 @@
+<ion-content [fullscreen]="true" class="pin-content" [scrollY]="false">
+
+  <!-- Success state: Code PIN créé ! -->
+  <div class="success-container" *ngIf="phase === 'success'">
+    <div class="back-arrow" style="position:absolute;top:calc(16px + var(--ion-safe-area-top,0px));left:24px">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+    <div class="check-circle">
+      <ion-icon name="checkmark-sharp"></ion-icon>
+    </div>
+    <h1>Code Pink créé !</h1>
+    <p>Bienvenue sur commun safe, votre application qui vous aide à gérer votre tontine</p>
+    <div class="loader-spinner"></div>
+    <div class="pattern-footer">
+      <img src="assets/patterns/african-geometric-footer.svg" alt="" />
+    </div>
+  </div>
+
+  <!-- Create / Confirm state -->
+  <div class="pin-container" *ngIf="phase !== 'success'" (click)="focusInput()">
+    <div class="back-arrow" (click)="goBack(); $event.stopPropagation()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+
+    <div class="user-info">
+      <div class="avatar-photo">
+        <ion-icon name="person" color="medium" *ngIf="!userPhoto"></ion-icon>
+        <img *ngIf="userPhoto" [src]="userPhoto" alt="Avatar" />
+      </div>
+      <p class="user-name">{{ userName }}</p>
+    </div>
+
+    <h1>{{ title }}</h1>
+    <p class="description" *ngIf="phase === 'create'">Ce code est celui de votre accès à l'application ce code sera entrer à chaque ouverture de l'application</p>
+    <p class="error" *ngIf="error">{{ error }}</p>
+
+    <div class="pin-circles">
+      <div *ngFor="let filled of pinDots" class="pin-dot" [class.filled]="filled"></div>
+    </div>
+
+    <input #hiddenPin type="tel" inputmode="numeric"
+      [ngModel]="currentValue"
+      (ngModelChange)="phase === 'create' ? pinValue = $event : confirmPinValue = $event; onPinChange()"
+      maxlength="5" class="hidden-input" />
+
+    <ion-button expand="block" color="primary" class="confirm-btn"
+      [disabled]="currentValue.length < 5" (click)="onConfirm(); $event.stopPropagation()">
+      CONFIRMER
+    </ion-button>
+  </div>
+</ion-content>

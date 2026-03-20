@@ -1,0 +1,27 @@
+<ion-content [fullscreen]="true" class="myprof-content" [scrollY]="true">
+  <div class="prof-header">
+    <div class="pattern-bg"></div>
+    <div class="header-nav"><ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon><span class="title">Profil</span><span></span></div>
+    <div class="avatar-wrap">
+      <div class="avatar-circle"><ion-icon name="person" color="light"></ion-icon></div>
+      <div class="edit-badge"><ion-icon name="pencil"></ion-icon></div>
+    </div>
+    <h1>{{ user.name }}</h1>
+    <p class="phone">{{ user.phone }}</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="sbox"><span class="snum">{{ user.stats.total }}</span><span class="slbl">Total</span></div>
+    <div class="sbox green"><span class="snum">{{ user.stats.enCours }}</span><span class="slbl">En cours</span></div>
+    <div class="sbox green"><span class="snum">{{ user.stats.succes }}</span><span class="slbl">Succès</span></div>
+    <div class="sbox red"><span class="snum">{{ user.stats.echec }}</span><span class="slbl">Échec</span></div>
+  </div>
+
+  <div class="menu-list">
+    <div *ngFor="let m of menuItems" class="menu-item" (click)="navigate(m)">
+      <ion-icon [name]="m.icon" class="menu-icon"></ion-icon>
+      <span class="menu-label">{{ m.label }}</span>
+      <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+    </div>
+  </div>
+</ion-content>

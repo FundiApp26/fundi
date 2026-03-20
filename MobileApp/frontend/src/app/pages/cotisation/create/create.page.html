@@ -1,0 +1,112 @@
+<ion-content [fullscreen]="true" class="create-content" [scrollY]="true">
+  <div class="page-container">
+
+    <!-- STEP 1: Member selection -->
+    <ng-container *ngIf="step === 'members'">
+      <div class="header-row">
+        <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+        <h1>Nouvelle cotisation</h1>
+        <span class="count" *ngIf="selectedCount > 0">{{ selectedCount }}</span>
+      </div>
+
+      <div class="search-bar">
+        <ion-icon name="search-outline"></ion-icon>
+        <input type="text" [(ngModel)]="searchQuery" placeholder="Taper le nom ou le numéro" />
+      </div>
+
+      <div *ngFor="let group of groupedContacts" class="contact-group">
+        <div class="letter">{{ group.letter }}</div>
+        <div *ngFor="let c of group.contacts" class="contact-item" [class.selected]="c.selected" (click)="toggleContact(c)">
+          <div class="c-avatar">
+            <span *ngIf="c.initials && !c.avatar" class="initials">{{ c.initials }}</span>
+            <ion-icon *ngIf="!c.initials && !c.avatar" name="person" color="medium"></ion-icon>
+            <div class="check-overlay" *ngIf="c.selected"><ion-icon name="checkmark"></ion-icon></div>
+          </div>
+          <div class="c-info">
+            <span class="c-name">{{ c.name }}</span>
+            <span class="c-phone">{{ c.phone }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-action">
+        <ion-button expand="block" color="primary" class="action-btn" [disabled]="selectedCount === 0" (click)="nextStep()">SUIVANT</ion-button>
+      </div>
+    </ng-container>
+
+    <!-- STEP 2: Form -->
+    <ng-container *ngIf="step === 'form'">
+      <div class="header-row">
+        <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+        <h1>Nouvelle cotisation</h1>
+      </div>
+
+      <div class="field">
+        <label>Montant de la cotisation</label>
+        <div class="input-box with-suffix">
+          <input type="tel" [(ngModel)]="montant" placeholder="5.000" />
+          <span class="suffix">Fcfa</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Fréquence</label>
+        <div class="input-box select">
+          <select [(ngModel)]="frequence">
+            <option value="" disabled>Sélectionner</option>
+            <option value="daily">Chaque jour</option>
+            <option value="2days">Tous les 2 jours</option>
+            <option value="3days">Tous les 3 jours</option>
+            <option value="weekly">Chaque semaine</option>
+          </select>
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Jour de début de la cotisation</label>
+        <div class="input-box select">
+          <select [(ngModel)]="jourDebut">
+            <option value="" disabled>Sélectionner</option>
+            <option value="lundi">Lundi</option>
+            <option value="mardi">Mardi</option>
+            <option value="mercredi">Mercredi</option>
+            <option value="jeudi">Jeudi</option>
+            <option value="vendredi">Vendredi</option>
+            <option value="samedi">Samedi</option>
+            <option value="dimanche">Dimanche</option>
+          </select>
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Heure de cotisation</label>
+        <div class="input-box">
+          <input type="time" [(ngModel)]="heureCotisation" placeholder="10 : 50" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Nom de la cotisation</label>
+        <div class="input-box">
+          <input type="text" [(ngModel)]="nomCotisation" placeholder="Entrer le nom" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Description de la cotisation</label>
+        <div class="input-box textarea">
+          <textarea [(ngModel)]="description" placeholder="Entrer une description" rows="3"></textarea>
+        </div>
+      </div>
+
+      <ion-button expand="block" color="primary" class="action-btn" (click)="createCotisation()">CRÉER UNE COTISATION</ion-button>
+    </ng-container>
+
+  </div>
+
+  <div class="pattern-footer" *ngIf="step === 'members'">
+    <img src="assets/patterns/african-geometric-footer.svg" alt="" />
+  </div>
+</ion-content>

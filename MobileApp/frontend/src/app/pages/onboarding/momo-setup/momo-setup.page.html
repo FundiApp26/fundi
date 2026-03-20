@@ -1,0 +1,55 @@
+<ion-content [fullscreen]="true" class="momo-content" [scrollY]="true">
+  <div class="page-container">
+    <!-- Back arrow -->
+    <div class="back-arrow" (click)="goBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+
+    <!-- Header centered -->
+    <h1>OM & MoMo</h1>
+    <p class="subtitle">Entrer vos coordonnées OrangeMoney et Mtn Mobile Money</p>
+
+    <!-- Orange Money -->
+    <div class="field-group">
+      <label>N° Orange Money *</label>
+      <div class="input-box with-icon">
+        <input type="tel" [(ngModel)]="omNumber" placeholder="+237 –" maxlength="12" />
+        <img src="assets/operators/orange-money-logo.png" alt="OM" class="operator-icon" />
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Nom de confirmation *</label>
+      <div class="input-box">
+        <input type="text" [(ngModel)]="omName" placeholder="Entrer le nom" />
+      </div>
+    </div>
+
+    <!-- MTN MoMo -->
+    <div class="field-group mtn-section">
+      <label>N° Mtn Mobile Money</label>
+      <div class="input-box with-icon">
+        <input type="tel" [(ngModel)]="momoNumber" placeholder="+237 –" maxlength="12" />
+        <img src="assets/operators/mtn-momo-logo.png" alt="MoMo" class="operator-icon" />
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Nom de confirmation *</label>
+      <div class="input-box">
+        <input type="text" [(ngModel)]="momoName" placeholder="Entrer le nom" />
+      </div>
+    </div>
+
+    <!-- Validate button -->
+    <div class="action-section">
+      <ion-button expand="block" color="primary" class="action-btn" (click)="onValidate()">
+        VALIDEZ ET ENTREZ VOTRE CODE
+      </ion-button>
+    </div>
+  </div>
+
+  <div class="pattern-footer">
+    <img src="assets/patterns/african-geometric-footer.svg" alt="" />
+  </div>
+</ion-content>

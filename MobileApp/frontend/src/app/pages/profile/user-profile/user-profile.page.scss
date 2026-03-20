@@ -1,0 +1,41 @@
+.uprof-content { --background: #fff; }
+
+.profile-header {
+  position: relative; background: var(--fundi-green); padding: 0 16px 20px;
+  padding-top: calc(12px + var(--ion-safe-area-top, 0px)); text-align: center;
+}
+.pattern-bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('/assets/patterns/african-geometric.png'); background-size: 100% auto; opacity: 0.06; }
+.header-nav { display: flex; justify-content: space-between; position: relative; z-index: 1; margin-bottom: 8px; ion-icon { font-size: 24px; color: #fff; cursor: pointer; } }
+.avatar-wrap { position: relative; z-index: 1; margin-bottom: 10px; }
+.avatar-circle { width: 90px; height: 90px; border-radius: 50%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; overflow: hidden; margin: 0 auto; border: 3px solid #fff; img { width: 100%; height: 100%; object-fit: cover; } ion-icon { font-size: 40px; } }
+.profile-header h1 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: #fff; margin: 0; position: relative; z-index: 1; }
+.action-icons { display: flex; justify-content: center; gap: 20px; margin-top: 8px; position: relative; z-index: 1; ion-icon { font-size: 22px; color: #fff; cursor: pointer; } }
+
+.body { padding: 16px; }
+.section-label { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; color: #888; margin: 0 0 12px; &.centered { text-align: center; } }
+
+.stats { display: flex; gap: 8px; margin-bottom: 16px; }
+.sbox { flex: 1; border: 1px solid #e0e0e0; border-radius: 8px; padding: 10px 4px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.snum { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--fundi-dark); }
+.slbl { font-family: 'Poppins', sans-serif; font-size: 11px; color: #888; }
+.sbox.green { border-color: var(--fundi-green); .snum { color: var(--fundi-green); } }
+.sbox.red { border-color: #e53935; .snum { color: #e53935; } }
+
+.irow { display: flex; align-items: center; gap: 10px; padding: 10px 0; ion-icon { font-size: 18px; color: #888; } span { font-family: 'Poppins', sans-serif; font-size: 14px; color: var(--fundi-dark); flex: 1; } }
+.tag { font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 4px; flex: 0 0 auto; &.green { background: #E8F5E6; color: var(--fundi-green); } &.outline { border: 1px solid var(--fundi-green); color: var(--fundi-green); border-radius: 12px; } }
+
+.sep { height: 1px; background: #f0f0f0; margin: 12px 0; }
+
+.prow { display: flex; align-items: center; gap: 10px; padding: 8px 0; .opico { width: 24px; height: 18px; object-fit: contain; } ion-icon { font-size: 18px; color: #888; } span { font-family: 'Poppins', sans-serif; font-size: 14px; color: var(--fundi-dark); } }
+
+.mhdr { display: flex; justify-content: space-between; margin-bottom: 8px; span { font-family: 'Poppins', sans-serif; font-size: 14px; color: var(--fundi-dark); } a { font-family: 'Poppins', sans-serif; font-size: 13px; color: var(--fundi-green); cursor: pointer; } }
+.mthumbs { display: flex; gap: 8px; margin-bottom: 8px; }
+.th { width: 80px; height: 60px; background: #f0f0f0; border-radius: 6px; }
+
+.grow { display: flex; align-items: center; gap: 12px; padding: 10px 0; }
+.gavatar { width: 44px; height: 44px; border-radius: 50%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; ion-icon { font-size: 20px; } }
+.ginfo { display: flex; flex-direction: column; }
+.gname { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; color: var(--fundi-dark); }
+.gmem { font-family: 'Poppins', sans-serif; font-size: 12px; color: #888; }
+
+.drow { display: flex; align-items: center; gap: 10px; padding: 12px 0; cursor: pointer; ion-icon { font-size: 18px; color: #e53935; } span { font-family: 'Poppins', sans-serif; font-size: 14px; color: #e53935; } }

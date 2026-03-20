@@ -1,0 +1,50 @@
+<ion-content [fullscreen]="true" class="login-content" [scrollY]="false">
+  <div class="login-container">
+    <!-- Back arrow -->
+    <div class="back-arrow" (click)="goBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+
+    <!-- Logo section -->
+    <div class="logo-section">
+      <div class="logo-icon-wrapper">
+        <img src="assets/logo/logo-full.png" alt="Fundi" class="logo-icon" />
+      </div>
+      <h2 class="brand-name">COMMON SAFE</h2>
+      <p class="brand-slogan">TONTINER AUTREMENT</p>
+    </div>
+
+    <h1>Entrez votre code PIN</h1>
+
+    <!-- 5 PIN circles -->
+    <div class="pin-circles">
+      <div *ngFor="let filled of pinDots" class="pin-dot" [class.filled]="filled"></div>
+    </div>
+
+    <!-- Confirm button -->
+    <ion-button expand="block" color="primary" class="confirm-btn"
+      [disabled]="pinValue.length < 5" (click)="onConfirm()">
+      CONFIRMER
+    </ion-button>
+
+    <!-- Forgot password -->
+    <a class="forgot-link" (click)="forgotPassword()">Mot de passe oublié</a>
+  </div>
+
+  <!-- Custom keypad -->
+  <div class="keypad">
+    <div class="keypad-row" *ngFor="let row of keypad">
+      <div *ngFor="let key of row"
+        class="keypad-key"
+        [class.special]="key.d === '+'"
+        (click)="onKeyAction(key.d)">
+        <ng-container *ngIf="key.d !== 'back' && key.d !== '+'">
+          <span class="key-digit">{{ key.d }}</span>
+          <span class="key-sub" *ngIf="key.sub">{{ key.sub }}</span>
+        </ng-container>
+        <span *ngIf="key.d === '+'" class="key-digit special-text">+ * #</span>
+        <ion-icon *ngIf="key.d === 'back'" name="backspace-outline" class="backspace-icon"></ion-icon>
+      </div>
+    </div>
+  </div>
+</ion-content>

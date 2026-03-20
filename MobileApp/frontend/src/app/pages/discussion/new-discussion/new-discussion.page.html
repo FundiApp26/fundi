@@ -1,0 +1,40 @@
+<ion-content [fullscreen]="true" class="newdisc-content" [scrollY]="true">
+  <div class="page-container">
+    <!-- Header -->
+    <div class="header-row">
+      <ion-icon name="arrow-back-outline" class="back-icon" (click)="goBack()"></ion-icon>
+      <h1>Nouvelle discussion</h1>
+      <ion-icon name="search-outline" class="search-icon"></ion-icon>
+    </div>
+
+    <!-- Search bar -->
+    <div class="search-bar">
+      <ion-icon name="search-outline" class="search-input-icon"></ion-icon>
+      <input type="text" [(ngModel)]="searchQuery" placeholder="Taper le nom ou le numéro" />
+    </div>
+
+    <!-- Invite -->
+    <div class="invite-row" (click)="invitePerson()">
+      <div class="invite-icon">
+        <ion-icon name="person-add"></ion-icon>
+      </div>
+      <span class="invite-text">Inviter une personne</span>
+    </div>
+
+    <!-- Contacts grouped by letter -->
+    <div *ngFor="let group of groupedContacts" class="contact-group">
+      <div class="letter-header">{{ group.letter }}</div>
+      <div *ngFor="let contact of group.contacts" class="contact-item" (click)="selectContact(contact)">
+        <div class="contact-avatar">
+          <img *ngIf="contact.avatar" [src]="contact.avatar" alt="" />
+          <span *ngIf="!contact.avatar && contact.initials" class="initials">{{ contact.initials }}</span>
+          <ion-icon *ngIf="!contact.avatar && !contact.initials" name="person" color="medium"></ion-icon>
+        </div>
+        <div class="contact-info">
+          <span class="contact-name">{{ contact.name }}</span>
+          <span class="contact-phone">{{ contact.phone }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,56 @@
+<ion-content [fullscreen]="true" class="otp-content" [scrollY]="false">
+  <div class="page-container" (click)="focusInput()">
+    <!-- Back arrow -->
+    <div class="back-arrow" (click)="goBack(); $event.stopPropagation()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+
+    <!-- Title -->
+    <h1>Entrez votre code de vérification</h1>
+
+    <!-- Phone + wrong number -->
+    <div class="phone-row">
+      <span class="phone-display">{{ phone }}</span>
+      <span class="dot-separator">.</span>
+      <a class="wrong-number" (click)="wrongNumber(); $event.stopPropagation()">Wrong number ?</a>
+    </div>
+
+    <!-- OTP dashes (visual) -->
+    <div class="otp-dashes">
+      <div *ngFor="let d of otpDigits; let i = index"
+        class="otp-slot"
+        [class.filled]="d !== ''">
+        <span class="digit" *ngIf="d !== ''">{{ d }}</span>
+        <span class="dash" *ngIf="d === ''">—</span>
+      </div>
+    </div>
+
+    <p class="hint-text">Enter 6-digit code</p>
+
+    <!-- Hidden native input that triggers keyboard -->
+    <input
+      #hiddenInput
+      type="tel"
+      inputmode="numeric"
+      [(ngModel)]="otpValue"
+      (ngModelChange)="onOtpChange()"
+      maxlength="6"
+      class="hidden-input"
+      autocomplete="one-time-code"
+    />
+
+    <!-- Resend / Call -->
+    <div class="resend-section">
+      <div class="resend-row" (click)="resendSms(); $event.stopPropagation()">
+        <ion-icon name="chatbox-outline" class="resend-icon"></ion-icon>
+        <span class="resend-label">Resend SMS</span>
+        <span class="timer">{{ formatTimer(resendTimer) }}</span>
+      </div>
+      <div class="resend-row">
+        <ion-icon name="call-outline" class="resend-icon"></ion-icon>
+        <span class="resend-label">Call me</span>
+        <span class="timer">{{ formatTimer(callTimer) }}</span>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,69 @@
+<ion-content [fullscreen]="true" class="home-content">
+  <!-- Header -->
+  <div class="home-header">
+    <h1 class="app-name">Common Safe</h1>
+    <div class="header-actions">
+      <ion-icon name="search-outline" (click)="openSearch()"></ion-icon>
+      <ion-icon name="ellipsis-vertical" (click)="openMenu()"></ion-icon>
+    </div>
+  </div>
+
+  <!-- Toggle segment: pill buttons -->
+  <div class="segment-container">
+    <div class="segment-toggle">
+      <div class="segment-btn" [class.active]="activeTab === 'cotisation'" (click)="activeTab = 'cotisation'">
+        <span>Cotisation</span>
+        <span class="badge" *ngIf="activeTab !== 'cotisation' && totalUnread.cotisation > 0">{{ totalUnread.cotisation }}</span>
+      </div>
+      <div class="segment-btn" [class.active]="activeTab === 'discussion'" (click)="activeTab = 'discussion'">
+        <span>Discussion</span>
+        <span class="badge" *ngIf="activeTab !== 'discussion' && totalUnread.discussion > 0">{{ totalUnread.discussion }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- List -->
+  <div class="conversation-list" *ngIf="currentList.length > 0">
+    <div class="conversation-item" *ngFor="let item of currentList" (click)="openItem(item)">
+      <div class="avatar-wrapper">
+        <div class="avatar">
+          <img *ngIf="item.avatar" [src]="item.avatar" alt="" />
+          <ion-icon *ngIf="!item.avatar" [name]="activeTab === 'cotisation' ? 'people' : 'person'" color="medium"></ion-icon>
+        </div>
+      </div>
+      <div class="conv-info">
+        <div class="conv-top">
+          <span class="conv-name">
+            {{ item.name }}
+            <span class="online-dot" *ngIf="item.online">●</span>
+          </span>
+          <span class="conv-time">{{ item.time }}</span>
+        </div>
+        <div class="conv-bottom">
+          <span class="conv-message">{{ item.lastMessage }}</span>
+          <span class="unread-badge" *ngIf="item.unread > 0">{{ item.unread }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty-state" *ngIf="currentList.length === 0">
+    <div class="empty-bubble">
+      <span class="dots">●●●</span>
+    </div>
+    <p>Aucun échange</p>
+  </div>
+
+  <!-- FAB -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="fab-custom">
+    <ion-fab-button color="primary" (click)="onFabClick()">
+      <ion-icon [name]="activeTab === 'cotisation' ? 'add' : 'pencil'"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Pattern footer -->
+  <div class="pattern-footer">
+    <img src="assets/patterns/african-geometric-footer.svg" alt="" />
+  </div>
+</ion-content>

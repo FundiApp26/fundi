@@ -1,0 +1,56 @@
+<ion-content [fullscreen]="true" class="uprof-content" [scrollY]="true">
+  <div class="profile-header">
+    <div class="pattern-bg"></div>
+    <div class="header-nav">
+      <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+      <ion-icon name="ellipsis-vertical"></ion-icon>
+    </div>
+    <div class="avatar-wrap">
+      <div class="avatar-circle">
+        <ion-icon *ngIf="!user.avatar" name="person" color="light"></ion-icon>
+        <img *ngIf="user.avatar" [src]="user.avatar" />
+      </div>
+    </div>
+    <h1>{{ user.name }}</h1>
+    <div class="action-icons" *ngIf="!isAdmin">
+      <ion-icon name="videocam-outline"></ion-icon>
+      <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+    </div>
+  </div>
+
+  <div class="body">
+    <!-- ADMIN -->
+    <ng-container *ngIf="isAdmin">
+      <p class="section-label centered">État des cotisations</p>
+      <div class="stats">
+        <div class="sbox"><span class="snum">{{ user.stats.total }}</span><span class="slbl">Total</span></div>
+        <div class="sbox green"><span class="snum">{{ user.stats.enCours }}</span><span class="slbl">En cours</span></div>
+        <div class="sbox green"><span class="snum">{{ user.stats.succes }}</span><span class="slbl">Succès</span></div>
+        <div class="sbox red"><span class="snum">{{ user.stats.echec }}</span><span class="slbl">Échec</span></div>
+      </div>
+      <div class="irow"><ion-icon name="wallet-outline"></ion-icon><span>Montant le plus haut</span><span class="tag green">{{ user.montantHaut }}</span></div>
+      <div class="irow"><ion-icon name="wallet-outline"></ion-icon><span>Montant le plus bas</span><span class="tag green">{{ user.montantBas }}</span></div>
+      <div class="irow"><ion-icon name="time-outline"></ion-icon><span>Historique de cotisations</span></div>
+      <div class="sep"></div>
+      <div class="prow"><img src="assets/operators/orange-money-logo.png" class="opico"/><span>{{ user.phone1 }}</span></div>
+      <div class="prow"><img src="assets/operators/mtn-momo-logo.png" class="opico"/><span>{{ user.phone2 }}</span></div>
+      <div class="sep"></div>
+      <div class="mhdr"><span>Medias partagés</span><a>Tout afficher</a></div>
+      <div class="mthumbs"><div class="th"></div><div class="th"></div></div>
+    </ng-container>
+    <!-- MEMBER -->
+    <ng-container *ngIf="!isAdmin">
+      <div class="prow"><ion-icon name="call-outline"></ion-icon><span>{{ user.phone1 }}</span></div>
+      <div class="irow"><ion-icon name="shield-checkmark-outline"></ion-icon><span>Côte des cotisations</span><span class="tag outline">{{ user.cote }}</span></div>
+    </ng-container>
+    <div class="sep"></div>
+    <p class="section-label">{{ groupsEnCommun.length }} Groupes en commun</p>
+    <div *ngFor="let g of groupsEnCommun" class="grow">
+      <div class="gavatar"><ion-icon name="people" color="medium"></ion-icon></div>
+      <div class="ginfo"><span class="gname">{{ g.name }}</span><span class="gmem">{{ g.members }}</span></div>
+    </div>
+    <div class="sep"></div>
+    <div class="drow"><ion-icon name="ban-outline"></ion-icon><span>Bloquer</span></div>
+    <div class="drow"><ion-icon name="alert-circle-outline"></ion-icon><span>Signaler</span></div>
+  </div>
+</ion-content>

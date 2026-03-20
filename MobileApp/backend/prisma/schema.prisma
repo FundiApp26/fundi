@@ -1,0 +1,250 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(uuid()) @db.Uuid
+  phone           String    @unique @db.VarChar(20)
+  firstName       String    @map("first_name") @db.VarChar(100)
+  lastName        String    @default("") @map("last_name") @db.VarChar(100)
+  avatarUrl       String?   @map("avatar_url") @db.VarChar(500)
+  pinHash         String    @map("pin_hash") @db.VarChar(255)
+  omNumber        String?   @map("om_number") @db.VarChar(20)
+  omConfirmName   String?   @map("om_confirm_name") @db.VarChar(100)
+  momoNumber      String?   @map("momo_number") @db.VarChar(20)
+  momoConfirmName String?   @map("momo_confirm_name") @db.VarChar(100)
+  isPremium       Boolean   @default(false) @map("is_premium")
+  premiumUntil    DateTime? @map("premium_until") @db.Timestamptz()
+  monthlySends    Int       @default(0) @map("monthly_sends")
+  sendsResetAt    DateTime? @map("sends_reset_at") @db.Timestamptz()
+  fcmToken        String?   @map("fcm_token") @db.VarChar(500)
+  isOnline        Boolean   @default(false) @map("is_online")
+  lastSeenAt      DateTime? @map("last_seen_at") @db.Timestamptz()
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt       DateTime  @updatedAt @map("updated_at") @db.Timestamptz()
+
+  createdCotisations  Cotisation[]         @relation("CotisationCreator")
+  memberships         CotisationMember[]
+  beneficiaryTours    Tour[]               @relation("TourBeneficiary")
+  payments            Payment[]            @relation("PaymentPayer")
+  confirmedPayments   Payment[]            @relation("PaymentConfirmer")
+  messages            Message[]
+  discussions1        Discussion[]         @relation("DiscussionUser1")
+  discussions2        Discussion[]         @relation("DiscussionUser2")
+  createdInvitations  Invitation[]
+  premiumTransactions PremiumTransaction[]
+  notifications       Notification[]
+
+  @@map("users")
+}
+
+model OtpCode {
+  id        String   @id @default(uuid()) @db.Uuid
+  phone     String   @db.VarChar(20)
+  code      String   @db.VarChar(10)
+  expiresAt DateTime @map("expires_at") @db.Timestamptz()
+  verified  Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
+
+  @@index([phone, code])
+  @@map("otp_codes")
+}
+
+model Cotisation {
+  id           String    @id @default(uuid()) @db.Uuid
+  name         String    @db.VarChar(100)
+  avatarUrl    String?   @map("avatar_url") @db.VarChar(500)
+  description  String?
+  amount       Int
+  periodicity  String    @db.VarChar(20)
+  weeklyDay    Int?      @map("weekly_day")
+  deadlineTime String    @map("deadline_time") @db.VarChar(10)
+  startDate    DateTime? @map("start_date") @db.Date
+  status       String    @default("active") @db.VarChar(20)
+  createdById  String    @map("created_by") @db.Uuid
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz()
+
+  createdBy   User               @relation("CotisationCreator", fields: [createdById], references: [id])
+  members     CotisationMember[]
+  tours       Tour[]
+  invitations Invitation[]
+  messages    Message[]          @relation("CotisationMessages")
+
+  @@map("cotisations")
+}
+
+model CotisationMember {
+  id           String   @id @default(uuid()) @db.Uuid
+  cotisationId String   @map("cotisation_id") @db.Uuid
+  userId       String   @map("user_id") @db.Uuid
+  role         String   @default("member") @db.VarChar(20)
+  tourOrder    Int?     @map("tour_order")
+  joinedAt     DateTime @default(now()) @map("joined_at") @db.Timestamptz()
+
+  cotisation Cotisation @relation(fields: [cotisationId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id])
+
+  @@unique([cotisationId, userId])
+  @@map("cotisation_members")
+}
+
+model Tour {
+  id            String   @id @default(uuid()) @db.Uuid
+  cotisationId  String   @map("cotisation_id") @db.Uuid
+  tourNumber    Int      @map("tour_number")
+  beneficiaryId String?  @map("beneficiary_id") @db.Uuid
+  scheduledDate DateTime @map("scheduled_date") @db.Date
+  status        String   @default("upcoming") @db.VarChar(20)
+
+  cotisation  Cotisation @relation(fields: [cotisationId], references: [id], onDelete: Cascade)
+  beneficiary User?      @relation("TourBeneficiary", fields: [beneficiaryId], references: [id])
+  payments    Payment[]
+
+  @@unique([cotisationId, tourNumber])
+  @@map("tours")
+}
+
+model Payment {
+  id            String    @id @default(uuid()) @db.Uuid
+  tourId        String    @map("tour_id") @db.Uuid
+  payerId       String    @map("payer_id") @db.Uuid
+  amount        Int
+  operator      String?   @db.VarChar(10)
+  status        String    @default("unpaid") @db.VarChar(20)
+  isExternal    Boolean   @default(false) @map("is_external")
+  proofUrl      String?   @map("proof_url") @db.VarChar(500)
+  confirmedById String?   @map("confirmed_by") @db.Uuid
+  dohoneRef     String?   @map("dohone_ref") @db.VarChar(100)
+  paidAt        DateTime? @map("paid_at") @db.Timestamptz()
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz()
+
+  tour        Tour  @relation(fields: [tourId], references: [id])
+  payer       User  @relation("PaymentPayer", fields: [payerId], references: [id])
+  confirmedBy User? @relation("PaymentConfirmer", fields: [confirmedById], references: [id])
+
+  @@map("payments")
+}
+
+model Message {
+  id               String      @id @default(uuid()) @db.Uuid
+  conversationType String      @map("conversation_type") @db.VarChar(20)
+  discussionId     String?     @map("discussion_id") @db.Uuid
+  cotisationId     String?     @map("cotisation_id") @db.Uuid
+  senderId         String      @map("sender_id") @db.Uuid
+  content          String?
+  mediaUrl         String?     @map("media_url") @db.VarChar(500)
+  messageType      String      @default("user") @map("message_type") @db.VarChar(20)
+  moneyAmount      Int?        @map("money_amount")
+  createdAt        DateTime    @default(now()) @map("created_at") @db.Timestamptz()
+
+  sender     User        @relation(fields: [senderId], references: [id])
+  discussion Discussion? @relation(fields: [discussionId], references: [id])
+  cotisation Cotisation? @relation("CotisationMessages", fields: [cotisationId], references: [id])
+
+  @@map("messages")
+}
+
+model Discussion {
+  id            String    @id @default(uuid()) @db.Uuid
+  user1Id       String    @map("user1_id") @db.Uuid
+  user2Id       String    @map("user2_id") @db.Uuid
+  lastMessageAt DateTime? @map("last_message_at") @db.Timestamptz()
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz()
+
+  user1    User      @relation("DiscussionUser1", fields: [user1Id], references: [id])
+  user2    User      @relation("DiscussionUser2", fields: [user2Id], references: [id])
+  messages Message[]
+
+  @@unique([user1Id, user2Id])
+  @@map("discussions")
+}
+
+model Invitation {
+  id           String    @id @default(uuid()) @db.Uuid
+  cotisationId String    @map("cotisation_id") @db.Uuid
+  token        String    @unique @db.VarChar(100)
+  createdById  String    @map("created_by") @db.Uuid
+  expiresAt    DateTime? @map("expires_at") @db.Timestamptz()
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz()
+
+  cotisation Cotisation @relation(fields: [cotisationId], references: [id])
+  createdBy  User       @relation(fields: [createdById], references: [id])
+
+  @@map("invitations")
+}
+
+model PremiumTransaction {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  amount    Int
+  operator  String?  @db.VarChar(10)
+  dohoneRef String?  @map("dohone_ref") @db.VarChar(100)
+  status    String   @default("pending") @db.VarChar(20)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("premium_transactions")
+}
+
+model Notification {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  title     String   @db.VarChar(200)
+  body      String
+  type      String   @db.VarChar(50)
+  data      String?  @db.Text
+  isRead    Boolean  @default(false) @map("is_read")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId, isRead])
+  @@map("notifications")
+}
+
+model SystemConfig {
+  id        String   @id @default(uuid()) @db.Uuid
+  key       String   @unique @db.VarChar(100)
+  value     String   @db.Text
+  type      String   @default("string") @db.VarChar(20)
+  label     String   @db.VarChar(200)
+  category  String   @default("general") @db.VarChar(50)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz()
+
+  @@map("system_configs")
+}
+
+model UploadedFile {
+  id           String   @id @default(uuid()) @db.Uuid
+  filename     String   @db.VarChar(255)
+  originalName String   @map("original_name") @db.VarChar(255)
+  mimeType     String   @map("mime_type") @db.VarChar(50)
+  size         Int
+  url          String   @db.VarChar(500)
+  uploadedBy   String?  @map("uploaded_by") @db.Uuid
+  context      String   @default("general") @db.VarChar(50)
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz()
+
+  @@map("uploaded_files")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String?  @map("user_id") @db.Uuid
+  action    String   @db.VarChar(100)
+  entity    String   @db.VarChar(50)
+  entityId  String?  @map("entity_id") @db.Uuid
+  details   String?  @db.Text
+  ip        String?  @db.VarChar(50)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
+
+  @@index([entity, entityId])
+  @@index([userId])
+  @@map("audit_logs")
+}

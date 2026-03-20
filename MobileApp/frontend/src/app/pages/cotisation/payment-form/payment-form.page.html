@@ -1,0 +1,43 @@
+<ion-content [fullscreen]="true" class="payform-content" [scrollY]="true">
+  <div class="page-container">
+    <div class="card">
+      <h2>Envoyer votre cotisation</h2>
+
+      <div class="amount-section">
+        <p class="amount-label"><ion-icon name="logo-usd" class="green-ico"></ion-icon> Montant à cotiser</p>
+        <div class="amount-box">
+          <span class="amount-value">{{ montant }} Fcfa</span>
+        </div>
+      </div>
+
+      <div class="operator-section">
+        <p class="op-label"><ion-icon name="logo-usd" class="green-ico"></ion-icon> Choisit le moyen de payement</p>
+        <div class="op-cards">
+          <div class="op-card" [class.selected]="selectedOperator === 'om'" (click)="selectedOperator = 'om'">
+            <div class="check-badge" *ngIf="selectedOperator === 'om'"><ion-icon name="checkmark"></ion-icon></div>
+            <img src="assets/operators/orange-money-logo.png" alt="OM" />
+          </div>
+          <div class="op-card" [class.selected]="selectedOperator === 'momo'" (click)="selectedOperator = 'momo'">
+            <div class="check-badge" *ngIf="selectedOperator === 'momo'"><ion-icon name="checkmark"></ion-icon></div>
+            <img src="assets/operators/mtn-momo-logo.png" alt="MoMo" />
+          </div>
+        </div>
+        <p class="conf-name" *ngIf="selectedOperator">Nom confirmation : <strong>{{ confirmationName }}</strong></p>
+      </div>
+
+      <ion-button expand="block" color="primary" class="btn-main" (click)="confirm()">CONFIRMER</ion-button>
+      <ion-button expand="block" fill="outline" class="btn-cancel" (click)="goBack()">ANNULER</ion-button>
+      <p class="instruction">Après cela, suivez les instructions de l'opérateur</p>
+    </div>
+  </div>
+
+  <!-- Success modal -->
+  <div class="modal-overlay" *ngIf="showSuccess">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card success-card">
+      <div class="check-circle"><ion-icon name="checkmark-sharp"></ion-icon></div>
+      <p class="success-text">Opération effectuée avec succès</p>
+      <ion-button expand="block" fill="outline" class="outline-btn" (click)="close()">FERMER</ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,46 @@
+<ion-content [fullscreen]="true" class="profile-content" [scrollY]="true">
+  <div class="page-container">
+    <!-- Back arrow -->
+    <div class="back-arrow" (click)="goBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+
+    <!-- Header -->
+    <h1>Informations sur le profil</h1>
+    <p class="subtitle">Please enter your name and a photo for your profile</p>
+
+    <!-- Avatar photo picker -->
+    <div class="avatar-section" (click)="pickPhoto()">
+      <div class="avatar-circle">
+        <img *ngIf="photoUrl" [src]="photoUrl" alt="Avatar" />
+        <ion-icon *ngIf="!photoUrl" name="camera" class="camera-icon"></ion-icon>
+      </div>
+      <p class="avatar-label">Photo de profil</p>
+    </div>
+
+    <!-- Form fields with labels above and bordered inputs -->
+    <div class="form-section">
+      <div class="field-group">
+        <label>Votre nom *</label>
+        <div class="input-box">
+          <input type="text" [(ngModel)]="nom" placeholder="Nom" />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Votre prenons</label>
+        <div class="input-box">
+          <input type="text" [(ngModel)]="prenom" placeholder="Prénom" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Next button -->
+    <div class="action-section">
+      <ion-button expand="block" color="primary" class="action-btn"
+        [disabled]="!nom.trim()" (click)="onNext()">
+        SUIVANT
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

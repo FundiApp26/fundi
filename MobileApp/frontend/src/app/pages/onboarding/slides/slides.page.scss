@@ -1,0 +1,133 @@
+.slides-content {
+  --background: #ffffff;
+}
+
+.full-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+swiper-slide {
+  height: 100%;
+}
+
+// Each slide = full page
+.slide-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+}
+
+// Green illustration area
+.illustration-area {
+  position: relative;
+  flex: 0 0 45%;
+  background: linear-gradient(180deg, #E8F5E6 0%, #EFF7ED 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.pattern-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url('/assets/patterns/african-geometric.png');
+  background-size: 100% auto;
+  background-repeat: repeat;
+  opacity: 0.04;
+}
+
+.curved-bottom {
+  position: absolute;
+  bottom: -1px; left: -10%; right: -10%;
+  height: 50px;
+  background: #ffffff;
+  border-radius: 50% 50% 0 0;
+}
+
+.illustration-wrapper {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 24px;
+}
+
+.illust-icon {
+  position: relative;
+  width: min(35vw, 140px);
+  height: min(35vw, 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .icon-main {
+    font-size: min(20vw, 80px);
+    &.green { color: var(--fundi-green); }
+    &.orange { color: var(--fundi-orange); }
+  }
+
+  .icon-secondary {
+    position: absolute;
+    top: 5px; right: 5px;
+    font-size: min(9vw, 36px);
+    &.green { color: var(--fundi-green); }
+    &.orange { color: var(--fundi-orange); }
+  }
+}
+
+// Text area
+.text-area {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 32px 0;
+
+  p {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(16px, 4.5vw, 22px);
+    font-weight: 600;
+    color: var(--fundi-dark);
+    line-height: 1.4;
+    margin: 0;
+    text-align: center;
+  }
+}
+
+// Pagination dashes
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 0;
+}
+
+.dash {
+  width: 24px;
+  height: 4px;
+  border-radius: 2px;
+  background: #D9D9D9;
+  transition: all 0.3s ease;
+
+  &.active {
+    background: var(--fundi-orange);
+  }
+}
+
+// Skip button
+.skip-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  padding-bottom: calc(24px + var(--ion-safe-area-bottom, 0px));
+
+  span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #aaa;
+  }
+}

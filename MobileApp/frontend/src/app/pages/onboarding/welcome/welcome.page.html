@@ -1,0 +1,40 @@
+<ion-content [fullscreen]="true" class="welcome-content" [scrollY]="false">
+  <div class="welcome-container">
+
+    <!-- Logo section: icon + text composed vertically -->
+    <div class="logo-section">
+      <div class="logo-icon-wrapper">
+        <img src="assets/logo/logo-full.png" alt="Fundi" class="logo-icon" />
+      </div>
+      <h2 class="brand-name">COMMON SAFE</h2>
+      <p class="brand-slogan">TONTINER AUTREMENT</p>
+    </div>
+
+    <!-- Welcome text -->
+    <div class="welcome-text">
+      <h1>Welcome to<br/>Fundi</h1>
+    </div>
+
+    <div class="spacer"></div>
+
+    <!-- Legal links -->
+    <div class="legal-links">
+      <p>
+        Please read our <a href="#" (click)="$event.preventDefault()">privacy policy</a>.
+        Press "accept and continue" to accept the <a href="#" (click)="$event.preventDefault()">terms of use</a>
+      </p>
+    </div>
+
+    <!-- Accept button -->
+    <div class="action-section">
+      <ion-button expand="block" color="primary" class="accept-btn" (click)="acceptAndContinue()">
+        ACCEPTER ET CONTINUER
+      </ion-button>
+    </div>
+
+  </div>
+
+  <div class="pattern-footer">
+    <img src="assets/patterns/african-geometric-footer.svg" alt="" />
+  </div>
+</ion-content>

@@ -1,0 +1,98 @@
+<ion-content [fullscreen]="true" class="chat-content" [scrollY]="true">
+  <!-- Header -->
+  <div class="chat-header">
+    <ion-icon name="arrow-back-outline" class="back-icon" (click)="goBack()"></ion-icon>
+    <div class="contact-avatar">
+      <img *ngIf="contactAvatar" [src]="contactAvatar" alt="" />
+      <ion-icon *ngIf="!contactAvatar" name="person" color="medium"></ion-icon>
+    </div>
+    <span class="contact-name">{{ contactName }}</span>
+    <div class="header-right">
+      <ion-icon name="videocam-outline"></ion-icon>
+      <ion-icon name="ellipsis-vertical"></ion-icon>
+    </div>
+  </div>
+
+  <!-- Messages -->
+  <div class="messages-container">
+    <ng-container *ngFor="let msg of messages">
+      <div class="date-separator" *ngIf="msg.date">
+        <span>{{ msg.date }}</span>
+      </div>
+      <div class="message-row" [class.sent]="msg.sent" [class.received]="!msg.sent">
+        <div class="avatar-small" *ngIf="!msg.sent">
+          <ion-icon name="person" color="medium"></ion-icon>
+        </div>
+        <div class="bubble">
+          <p>{{ msg.text }}</p>
+        </div>
+      </div>
+      <div class="msg-time" [class.sent]="msg.sent">{{ msg.time }}</div>
+    </ng-container>
+  </div>
+
+  <!-- Send Money Modal -->
+  <div class="modal-overlay" *ngIf="showSendMoney">
+    <div class="modal-backdrop" (click)="showSendMoney = false"></div>
+    <div class="modal-card send-money-card">
+      <h2>Envoyer de l'argent à<br/>{{ contactName }}</h2>
+
+      <div class="field-group">
+        <label>Montant *</label>
+        <div class="amount-input">
+          <input type="tel" [(ngModel)]="sendAmount" placeholder="Entrer le montant" />
+          <span class="currency">FCFA</span>
+        </div>
+      </div>
+
+      <div class="operator-section">
+        <p class="operator-label"><ion-icon name="logo-usd" class="dollar-icon"></ion-icon> Choisit le moyen de payement</p>
+        <div class="operator-cards">
+          <div class="operator-card" [class.selected]="selectedOperator === 'om'" (click)="selectedOperator = 'om'">
+            <div class="check-badge" *ngIf="selectedOperator === 'om'"><ion-icon name="checkmark"></ion-icon></div>
+            <img src="assets/operators/orange-money-logo.png" alt="OM" />
+          </div>
+          <div class="operator-card" [class.selected]="selectedOperator === 'momo'" (click)="selectedOperator = 'momo'">
+            <div class="check-badge" *ngIf="selectedOperator === 'momo'"><ion-icon name="checkmark"></ion-icon></div>
+            <img src="assets/operators/mtn-momo-logo.png" alt="MoMo" />
+          </div>
+        </div>
+        <p class="confirmation-name" *ngIf="selectedOperator">Nom confirmation : <strong>{{ confirmationName }}</strong></p>
+      </div>
+
+      <ion-button expand="block" color="primary" class="confirm-btn" (click)="confirmSendMoney()">CONFIRMER</ion-button>
+      <ion-button expand="block" fill="outline" class="cancel-btn" (click)="showSendMoney = false">ANNULER</ion-button>
+      <p class="instruction-text">Après cela, suivez les instructions de l'opérateur</p>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" *ngIf="showSuccess">
+    <div class="modal-backdrop" (click)="closeSuccess()"></div>
+    <div class="modal-card success-card">
+      <div class="check-circle">
+        <ion-icon name="checkmark-sharp"></ion-icon>
+      </div>
+      <p class="success-text">Opération effectuée avec succès</p>
+      <ion-button expand="block" fill="outline" class="outline-btn">VOIR L'HISTORIQUE</ion-button>
+      <ion-button expand="block" fill="outline" class="outline-btn" (click)="closeSuccess()">FERMER</ion-button>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="chat-footer">
+  <div class="input-bar">
+    <div class="input-icons">
+      <ion-icon name="camera-outline"></ion-icon>
+      <ion-icon name="happy-outline"></ion-icon>
+      <ion-icon name="attach-outline"></ion-icon>
+    </div>
+    <input type="text" [(ngModel)]="messageText" placeholder="Tapez votre message" (keyup.enter)="sendMessage()" />
+    <div class="send-btn" (click)="sendMessage()">
+      <ion-icon name="send"></ion-icon>
+    </div>
+  </div>
+  <div class="pattern-footer">
+    <img src="assets/patterns/african-geometric-footer.svg" alt="" />
+  </div>
+</ion-footer>

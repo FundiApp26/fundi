@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  fundi:
+    image: nginx:alpine
+    container_name: fundi
+    restart: always
+    volumes:
+      - ./site:/usr/share/nginx/html:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fundi.rule=Host(`fundi-app.com`) || Host(`www.fundi-app.com`)"
+      - "traefik.http.routers.fundi.entrypoints=websecure"
+      - "traefik.http.routers.fundi.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.fundi-http.rule=Host(`fundi-app.com`) || Host(`www.fundi-app.com`)"
+      - "traefik.http.routers.fundi-http.entrypoints=web"
+      - "traefik.http.routers.fundi-http.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true

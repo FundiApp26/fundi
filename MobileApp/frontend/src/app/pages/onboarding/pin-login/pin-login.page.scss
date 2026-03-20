@@ -1,0 +1,77 @@
+.login-content { --background: #ffffff; }
+
+.login-container {
+  padding: 0 24px;
+  padding-top: calc(16px + var(--ion-safe-area-top, 0px));
+  text-align: center;
+}
+
+.back-arrow {
+  text-align: left; margin-bottom: 8px; cursor: pointer;
+  ion-icon { font-size: 24px; color: var(--fundi-dark); }
+}
+
+.logo-section {
+  display: flex; flex-direction: column; align-items: center; margin-bottom: 16px;
+}
+
+.logo-icon-wrapper {
+  width: 90px; height: 90px; margin-bottom: 4px; overflow: hidden;
+  display: flex; align-items: flex-start; justify-content: flex-end;
+  .logo-icon {
+    width: 180%; height: 180%; object-fit: contain;
+    margin-top: -18%; margin-right: -22%;
+  }
+}
+
+.brand-name {
+  font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700;
+  color: var(--fundi-green); letter-spacing: 3px; margin: 0;
+}
+
+.brand-slogan {
+  font-family: 'Poppins', sans-serif; font-size: 9px; font-weight: 500;
+  color: var(--fundi-orange); letter-spacing: 2px; margin: 2px 0 0;
+}
+
+.login-container h1 {
+  font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600;
+  color: var(--fundi-dark); margin: 8px 0 16px;
+}
+
+.pin-circles {
+  display: flex; justify-content: center; gap: 14px; margin-bottom: 20px;
+}
+
+.pin-dot {
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 2px solid #E8DFC5; background: transparent;
+  transition: all 0.15s ease;
+  &.filled { background: #2D5A27; border-color: #2D5A27; }
+}
+
+.confirm-btn {
+  margin: 0 0 12px;
+  --border-radius: 8px; --padding-top: 14px; --padding-bottom: 14px;
+  --background: #4A7C42;
+  font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600;
+}
+
+.forgot-link {
+  font-family: 'Poppins', sans-serif; font-size: 13px;
+  color: #888; text-decoration: none; cursor: pointer;
+}
+
+// Keypad
+.keypad { padding: 8px 4px 0; }
+.keypad-row { display: flex; justify-content: center; }
+.keypad-key {
+  width: 33.33%; height: 54px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  cursor: pointer; border: 1px solid #f0f0f0; background: #fafafa;
+  &:active { background: #eee; }
+  .key-digit { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 400; color: var(--fundi-dark); }
+  .key-sub { font-family: 'Poppins', sans-serif; font-size: 8px; font-weight: 600; color: #888; letter-spacing: 2px; margin-top: -2px; }
+  &.special .special-text { font-size: 14px; color: #888; }
+  .backspace-icon { font-size: 22px; color: var(--fundi-dark); }
+}

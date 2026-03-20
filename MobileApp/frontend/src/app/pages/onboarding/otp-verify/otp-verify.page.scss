@@ -1,0 +1,72 @@
+.otp-content { --background: #ffffff; }
+
+.page-container {
+  padding: 0 24px;
+  padding-top: calc(16px + var(--ion-safe-area-top, 0px));
+  min-height: 100%;
+}
+
+.back-arrow {
+  margin-bottom: 20px; cursor: pointer;
+  ion-icon { font-size: 24px; color: var(--fundi-dark); }
+}
+
+h1 {
+  font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 600;
+  color: var(--fundi-dark); margin: 0 0 20px; text-align: center;
+}
+
+.phone-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 4px; margin-bottom: 32px;
+
+  .phone-display {
+    font-family: 'Poppins', sans-serif; font-size: 15px; color: var(--fundi-dark);
+  }
+  .dot-separator { font-size: 15px; color: var(--fundi-dark); margin: 0 2px; }
+  .wrong-number {
+    font-family: 'Poppins', sans-serif; font-size: 15px;
+    color: var(--fundi-green); text-decoration: none; cursor: pointer;
+  }
+}
+
+// OTP dashes
+.otp-dashes {
+  display: flex; justify-content: center; gap: 10px; margin-bottom: 8px;
+}
+
+.otp-slot {
+  width: 40px; text-align: center;
+
+  .digit {
+    font-family: 'Poppins', sans-serif; font-size: 28px;
+    font-weight: 600; color: var(--fundi-dark);
+  }
+  .dash { font-size: 28px; color: #ccc; font-weight: 300; }
+  &.filled .dash { display: none; }
+}
+
+.hint-text {
+  font-family: 'Poppins', sans-serif; font-size: 13px;
+  color: #aaa; text-align: center; margin: 0 0 32px;
+}
+
+// Hidden input for native keyboard
+.hidden-input {
+  position: absolute; left: -9999px; opacity: 0;
+  width: 1px; height: 1px;
+}
+
+// Resend section
+.resend-section { padding: 0 16px; }
+
+.resend-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0; cursor: pointer;
+
+  .resend-icon { font-size: 20px; color: #aaa; }
+  .resend-label {
+    font-family: 'Poppins', sans-serif; font-size: 14px; color: #888; flex: 1;
+  }
+  .timer { font-family: 'Poppins', sans-serif; font-size: 14px; color: #aaa; }
+}

@@ -143,3 +143,59 @@ html {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+
+/* ===== CUSTOM CLASSES (remplacer inline styles) ===== */
+
+/* Logo text */
+.logo-text {
+  font-size: 40px;
+  line-height: 1;
+}
+
+/* Text colors */
+.text-body {
+  color: #4C504A;
+}
+
+.text-dark-alt {
+  color: #0A0A0A;
+}
+
+/* Background images */
+.bg-hero {
+  background-image: url('../assets/bg_hero.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-pattern {
+  background-image: url('../assets/pattern-shape-1@2x.png');
+  background-size: cover;
+}
+
+/* Contact form card */
+.contact-card {
+  box-shadow: 0px 0px 28px #A6A6A628;
+  border-radius: 6px;
+}
+
+/* CTA phone position */
+.cta-phone-position {
+  right: 35%;
+}
+
+/* Footer background */
+.bg-footer {
+  background-color: #2D5A27;
+}
+
+/* Social icon size */
+.social-icon-lg {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.social-icon-yt {
+  width: 36px;
+  height: 36px;
+}

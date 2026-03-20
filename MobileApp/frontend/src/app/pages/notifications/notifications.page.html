@@ -1,0 +1,20 @@
+<ion-content [fullscreen]="true" class="notif-content" [scrollY]="true">
+  <div class="page-container">
+    <div class="header-row"><ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon><h1>Notifications</h1></div>
+    <div *ngFor="let g of groups">
+      <p class="group-label">{{ g.label }}</p>
+      <div *ngFor="let n of g.items" class="notif-item" [class.unread]="n.unread">
+        <div class="n-avatar">
+          <ion-icon *ngIf="n.icon" [name]="n.icon" class="n-icon"></ion-icon>
+          <span *ngIf="n.initials && !n.icon" class="n-initials">{{ n.initials }}</span>
+          <ion-icon *ngIf="!n.icon && !n.initials" name="person" color="medium"></ion-icon>
+        </div>
+        <div class="n-info">
+          <p class="n-text"><strong>{{ n.name }}</strong> {{ n.text }}</p>
+          <span class="n-time">{{ n.time }}</span>
+        </div>
+        <div class="n-dot" *ngIf="n.unread"></div>
+      </div>
+    </div>
+  </div>
+</ion-content>

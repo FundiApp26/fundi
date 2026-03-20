@@ -1,0 +1,107 @@
+<ion-content [fullscreen]="true" class="cprof-content" [scrollY]="true">
+  <!-- Green header -->
+  <div class="cprof-header">
+    <div class="pattern-bg"></div>
+    <div class="header-nav">
+      <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+      <ion-icon name="ellipsis-vertical"></ion-icon>
+    </div>
+    <div class="avatar-wrap">
+      <div class="avatar-circle">
+        <ion-icon name="people" color="light"></ion-icon>
+      </div>
+    </div>
+    <h1>{{ cotisation.name }}</h1>
+    <p class="status">{{ cotisation.status }}</p>
+  </div>
+
+  <div class="body">
+    <!-- 3 action buttons -->
+    <div class="actions-row">
+      <div class="action-item" (click)="openCotiser()">
+        <div class="action-icon"><ion-icon name="cash-outline"></ion-icon></div>
+        <span>Cotiser</span>
+      </div>
+      <div class="action-item" (click)="openListe()">
+        <div class="action-icon"><ion-icon name="list-outline"></ion-icon></div>
+        <span>Liste</span>
+      </div>
+      <div class="action-item" (click)="openCalendrier()">
+        <div class="action-icon"><ion-icon name="calendar-outline"></ion-icon></div>
+        <span>Calendrier</span>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="info-row">
+      <span class="info-label">Description</span>
+      <a class="voir-plus">Voir plus</a>
+    </div>
+    <p class="desc-text">{{ cotisation.description }}</p>
+
+    <div class="info-row">
+      <ion-icon name="logo-usd" class="info-ico"></ion-icon>
+      <span class="info-label">Montant</span>
+      <span class="info-value green">{{ cotisation.montant }}</span>
+    </div>
+
+    <div class="info-row">
+      <ion-icon name="time-outline" class="info-ico"></ion-icon>
+      <span class="info-label">Historique de tours de cotisation</span>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- Medias -->
+    <div class="media-hdr"><span>Medias partagés</span><a>Tout afficher</a></div>
+    <div class="media-row">
+      <div class="thumb"></div><div class="thumb"></div><div class="thumb"></div>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- Members list -->
+    <p class="section-title">Liste des membres</p>
+
+    <div class="member-row invite" (click)="null">
+      <div class="invite-icon"><ion-icon name="person-add"></ion-icon></div>
+      <span>Inviter une personne</span>
+    </div>
+
+    <div *ngFor="let m of members" class="member-row">
+      <div class="m-avatar"><ion-icon name="person" color="medium"></ion-icon></div>
+      <div class="m-info">
+        <span class="m-name">{{ m.name }}</span>
+        <span class="m-phone">{{ m.phone }}</span>
+      </div>
+    </div>
+
+    <a class="tout-afficher">Tout afficher</a>
+
+    <div class="sep"></div>
+
+    <div class="danger-row"><ion-icon name="log-out-outline"></ion-icon><span>Quitter la cotisation</span></div>
+    <div class="danger-row"><ion-icon name="alert-circle-outline"></ion-icon><span>Signaler</span></div>
+  </div>
+
+  <!-- Depot type modal -->
+  <div class="modal-overlay" *ngIf="showDepotModal">
+    <div class="modal-backdrop" (click)="showDepotModal = false"></div>
+    <div class="modal-card">
+      <h2>Quel type de dépôt souhaitez vous effectuer ?</h2>
+
+      <div class="radio-row" [class.selected]="depotType === 'app'" (click)="depotType = 'app'">
+        <div class="radio-dot" [class.active]="depotType === 'app'"></div>
+        <span>Dépôt via l'application</span>
+      </div>
+
+      <div class="radio-row" [class.selected]="depotType === 'externe'" (click)="depotType = 'externe'">
+        <div class="radio-dot" [class.active]="depotType === 'externe'"></div>
+        <span>Dépôt avec un autre numéro</span>
+      </div>
+
+      <ion-button expand="block" color="primary" class="modal-btn-main" (click)="confirmDepot()">SUIVANT</ion-button>
+      <ion-button expand="block" fill="outline" class="modal-btn-cancel" (click)="showDepotModal = false">ANNULER</ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -2,3 +2,25 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+
+# Backend
+MobileApp/backend/dist/
+MobileApp/backend/uploads/
+MobileApp/backend/.env
+
+# Frontend
+MobileApp/frontend/www/
+MobileApp/frontend/android/.gradle/
+MobileApp/frontend/android/app/build/
+MobileApp/frontend/android/local.properties
+
+# XD raw exports (too many files)
+MobileApp/frontend/src/assets/xd-raw/
+MobileApp/frontend/src/assets/placeholders/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+MobileApp/frontend/Maquettes UI/*.png
+MobileApp/.env

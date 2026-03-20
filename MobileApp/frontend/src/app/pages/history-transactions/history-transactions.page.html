@@ -1,0 +1,23 @@
+<ion-content [fullscreen]="true" class="htx-content" [scrollY]="true">
+  <div class="page-container">
+    <div class="header-row"><ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon><h1>Historique</h1></div>
+
+    <div *ngFor="let g of groups">
+      <p class="date-label">{{ g.date }}</p>
+      <div *ngFor="let tx of g.items" class="tx-row">
+        <div class="tx-avatar">
+          <ion-icon *ngIf="tx.icon" [name]="tx.icon" class="tx-icon"></ion-icon>
+          <ion-icon *ngIf="!tx.icon" name="person" color="medium"></ion-icon>
+        </div>
+        <div class="tx-info">
+          <span class="tx-name">{{ tx.name }}</span>
+          <span class="tx-sub">{{ tx.sub }}</span>
+        </div>
+        <div class="tx-right">
+          <span class="tx-amount" [class.positive]="tx.positive" [class.negative]="!tx.positive">{{ tx.amount }}</span>
+          <span class="tx-time">{{ tx.time }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

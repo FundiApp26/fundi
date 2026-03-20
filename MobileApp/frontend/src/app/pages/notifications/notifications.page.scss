@@ -1,0 +1,8 @@
+.notif-content { --background: #fff; }
+.page-container { padding: 0 16px; padding-top: calc(12px + var(--ion-safe-area-top, 0px)); }
+.header-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; ion-icon { font-size: 24px; color: var(--fundi-dark); cursor: pointer; } h1 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: var(--fundi-dark); margin: 0; } }
+.group-label { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; color: #888; margin: 16px 0 8px; }
+.notif-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 8px; border-radius: 8px; &.unread { background: rgba(45,90,39,0.04); } }
+.n-avatar { width: 44px; height: 44px; border-radius: 50%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; flex-shrink: 0; .n-icon { font-size: 20px; color: var(--fundi-green); } .n-initials { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; color: var(--fundi-dark); } ion-icon { font-size: 20px; } }
+.n-info { flex: 1; .n-text { font-family: 'Poppins', sans-serif; font-size: 13px; color: var(--fundi-dark); margin: 0 0 2px; line-height: 1.4; strong { font-weight: 600; } } .n-time { font-family: 'Poppins', sans-serif; font-size: 11px; color: #aaa; } }
+.n-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--fundi-green); flex-shrink: 0; margin-top: 4px; }

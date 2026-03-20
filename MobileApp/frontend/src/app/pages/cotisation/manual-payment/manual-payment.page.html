@@ -1,0 +1,49 @@
+<ion-content [fullscreen]="true" class="manual-content" [scrollY]="true">
+  <div class="page-container">
+    <div class="back-arrow" (click)="goBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+
+    <h1>Insérer la preuve du dépôt externe</h1>
+
+    <div class="field">
+      <label><ion-icon name="person-circle-outline" class="green-ico"></ion-icon> Personne concernée</label>
+      <div class="input-box select">
+        <select [(ngModel)]="personne">
+          <option value="" disabled>Sélectionner</option>
+          <option value="mpoul">Mpoul Dodji</option>
+          <option value="benoit">Benoit Marie</option>
+        </select>
+        <ion-icon name="chevron-down-outline"></ion-icon>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Montant *</label>
+      <div class="input-box with-suffix">
+        <input type="tel" [(ngModel)]="montant" placeholder="Entrer le montant" />
+        <span class="suffix">FCFA</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label><ion-icon name="camera-outline" class="green-ico"></ion-icon> Image de la preuve du dépôt</label>
+      <div class="image-placeholder" (click)="pickImage()">
+        <img *ngIf="proofImage" [src]="proofImage" />
+        <ion-icon *ngIf="!proofImage" name="image-outline"></ion-icon>
+      </div>
+    </div>
+
+    <ion-button expand="block" color="primary" class="btn-main" (click)="confirm()">CONFIRMER</ion-button>
+    <ion-button expand="block" fill="outline" class="btn-cancel" (click)="goBack()">ANNULER</ion-button>
+  </div>
+
+  <div class="modal-overlay" *ngIf="showSuccess">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <div class="check-circle"><ion-icon name="checkmark-sharp"></ion-icon></div>
+      <p class="success-text">Opération effectuée avec succès</p>
+      <ion-button expand="block" fill="outline" class="outline-btn" (click)="close()">FERMER</ion-button>
+    </div>
+  </div>
+</ion-content>

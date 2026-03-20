@@ -1,0 +1,70 @@
+<ion-content [fullscreen]="true" class="track-content" [scrollY]="true">
+  <div class="page-container">
+    <!-- Header -->
+    <div class="header-row">
+      <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+      <h1 *ngIf="view === 'members'">Liste des membres</h1>
+      <h1 *ngIf="view === 'tracking'">La liste de suivi des paiements</h1>
+      <div class="header-actions" *ngIf="view === 'members'">
+        <ion-icon name="close-outline"></ion-icon>
+        <ion-icon name="checkmark-outline" color="success"></ion-icon>
+      </div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-bar">
+      <ion-icon name="search-outline"></ion-icon>
+      <input type="text" [(ngModel)]="searchQuery" [placeholder]="view === 'members' ? 'Recherche' : 'Taper le nom'" />
+    </div>
+
+    <!-- Members list -->
+    <ng-container *ngIf="view === 'members'">
+      <div *ngFor="let m of members" class="member-row">
+        <ion-icon name="reorder-three-outline" class="drag-handle"></ion-icon>
+        <div class="num-badge">{{ m.num }}</div>
+        <span class="m-name">{{ m.name }}</span>
+        <ion-icon *ngIf="m.checked" name="checkmark" class="check-green"></ion-icon>
+        <span class="m-date"><ion-icon name="time-outline"></ion-icon> {{ m.date }}</span>
+      </div>
+    </ng-container>
+
+    <!-- Tracking list -->
+    <ng-container *ngIf="view === 'tracking'">
+      <div *ngFor="let t of tracking" class="tracking-row" [class.beneficiary]="t.isBeneficiary" (click)="t.detail ? openDetail(t) : null">
+        <div class="num-badge" [class.green]="t.checked">{{ t.num }}</div>
+        <div class="t-info">
+          <div class="t-name-row">
+            <span class="t-name" [class.beneficiary-name]="t.isBeneficiary">{{ t.name }}</span>
+            <ion-icon *ngIf="t.checked" name="checkmark" class="check-green"></ion-icon>
+            <span class="beneficiary-badge" *ngIf="t.isBeneficiary">Bénéficiaire</span>
+          </div>
+          <span class="t-date"><ion-icon name="time-outline"></ion-icon> {{ t.date }}</span>
+        </div>
+        <div class="t-right" *ngIf="t.amount || t.status">
+          <span class="t-amount" *ngIf="t.amount">{{ t.amount }}</span>
+          <span class="t-detail" *ngIf="t.detail">{{ t.detail }}</span>
+          <span class="t-status pending" *ngIf="t.status === 'En attente'">En attente</span>
+          <span class="t-status echec" *ngIf="t.status === 'Échec'">Échec</span>
+        </div>
+        <ion-icon *ngIf="t.detail" name="chevron-forward-outline" class="chevron"></ion-icon>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Detail modal -->
+  <div class="modal-overlay" *ngIf="showDetail && detailMember">
+    <div class="modal-backdrop" (click)="closeDetail()"></div>
+    <div class="modal-card detail-card">
+      <h2>Detail du dépôt</h2>
+      <p class="detail-label"><ion-icon name="person-circle-outline" class="green-ico"></ion-icon> Personne concernée</p>
+      <p class="detail-name">{{ detailMember.name }}</p>
+      <p class="detail-phone">+237 691 380 103</p>
+      <p class="detail-label"><ion-icon name="cash-outline" class="green-ico"></ion-icon> Montant envoyé</p>
+      <div class="detail-amount-box"><span>50.000 Fcfa</span></div>
+      <div class="detail-proof">
+        <div class="proof-placeholder"><ion-icon name="image-outline"></ion-icon></div>
+      </div>
+      <ion-button expand="block" fill="outline" class="outline-btn" (click)="closeDetail()">FERMER</ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -19,7 +19,7 @@ const translations = {
     about_label: "À propos",
     about_title: "Fundi",
     about_description_fundi: "Fundi",
-    about_description: " permet la gestion numérique des tontines à travers des profils pour établir la crédibilité des participants, l'automatisation des cotisations individuelles et de leur suivi.",
+    about_description: " permet la Solvabilité des participants aux tontines à travers des profils pour établir la crédibilité des participants, l'automatisation des cotisations individuelles et de leur suivi.",
     about_feature_1_title: "Consultez l'historique",
     about_feature_1_desc: "Consultez l'historique de cotisation des nouveaux adhérents et leur crédibilité",
     about_feature_2_title: "Vérifiez les listes",
@@ -68,7 +68,7 @@ const translations = {
     cta_description: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered.",
 
     // Footer
-    footer_description: "Fundi permet la gestion numérique des tontines à travers des profils pour établir la crédibilité des participants, l'automatisation des cotisations individuelles et de leur suivi.",
+    footer_description: "Fundi permet la Solvabilité des participants aux tontines à travers des profils pour établir la crédibilité des participants, l'automatisation des cotisations individuelles et de leur suivi.",
     footer_follow: "Suivez-nous",
     footer_copyright: "Copyright 2025 Fundi – All Right Reserved",
     footer_designed: "Designed by SEED SARL"
@@ -93,7 +93,7 @@ const translations = {
     about_label: "About",
     about_title: "Fundi",
     about_description_fundi: "Fundi",
-    about_description: " enables digital management of tontines through profiles to establish participant credibility, automation of individual contributions and their tracking.",
+    about_description: " enables tontine participant solvency assessment through profiles to establish participant credibility, automation of individual contributions and their tracking.",
     about_feature_1_title: "View history",
     about_feature_1_desc: "Check the contribution history of new members and their credibility",
     about_feature_2_title: "Verify lists",
@@ -142,7 +142,7 @@ const translations = {
     cta_description: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered.",
 
     // Footer
-    footer_description: "Fundi enables digital management of tontines through profiles to establish participant credibility, automation of individual contributions and their tracking.",
+    footer_description: "Fundi enables tontine participant solvency assessment through profiles to establish participant credibility, automation of individual contributions and their tracking.",
     footer_follow: "Follow us",
     footer_copyright: "Copyright 2025 Fundi – All Right Reserved",
     footer_designed: "Designed by SEED SARL"

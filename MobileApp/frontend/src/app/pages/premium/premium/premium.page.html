@@ -1,0 +1,25 @@
+<ion-content [fullscreen]="true" class="prem-content" [scrollY]="true">
+  <div class="page-container">
+    <div class="header-row"><ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon><h1>Premium</h1></div>
+
+    <div class="crown-section">
+      <img src="assets/badges/premium-crown.png" alt="Premium" class="crown-img" />
+    </div>
+
+    <p class="prem-desc">Passer en mode prémium et bénéficier de plus de volume d'opérations :</p>
+
+    <div class="price-box"><span class="price">10.000 FCFA</span><span class="per">/Mois</span></div>
+
+    <div class="benefit-card">
+      <ion-icon name="people" class="benefit-icon green"></ion-icon>
+      <p>S'inscrire à une infinité de groupes de cotisations</p>
+    </div>
+
+    <div class="benefit-card">
+      <ion-icon name="cash" class="benefit-icon orange"></ion-icon>
+      <p>infinité d'envois d'argent par mois (Groupe et utilisateur)</p>
+    </div>
+
+    <ion-button expand="block" color="primary" class="prem-btn" (click)="devenirPremium()">DEVENIR PRÉMIUM</ion-button>
+  </div>
+</ion-content>

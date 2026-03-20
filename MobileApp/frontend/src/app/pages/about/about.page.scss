@@ -1,0 +1,10 @@
+.about-content { --background: #fff; }
+.page-container { padding: 0 24px; padding-top: calc(12px + var(--ion-safe-area-top, 0px)); padding-bottom: 32px; text-align: center; }
+.header-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; text-align: left; ion-icon { font-size: 24px; color: var(--fundi-dark); cursor: pointer; } h1 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: var(--fundi-dark); margin: 0; } }
+.logo-section { margin-bottom: 24px; }
+.logo-icon-wrapper { width: 100px; height: 100px; margin: 0 auto 8px; overflow: hidden; display: flex; align-items: flex-start; justify-content: flex-end; .logo-icon { width: 180%; height: 180%; object-fit: contain; margin-top: -18%; margin-right: -22%; } }
+.logo-section h2 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: var(--fundi-green); letter-spacing: 3px; margin: 0; }
+.slogan { font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 500; color: var(--fundi-orange); letter-spacing: 2px; margin: 2px 0 0; }
+.about-text { margin-bottom: 20px; p { font-family: 'Poppins', sans-serif; font-size: 13px; color: #888; line-height: 1.6; margin: 0 0 12px; } }
+.about-links { margin-bottom: 24px; a { display: block; font-family: 'Poppins', sans-serif; font-size: 13px; color: var(--fundi-green); margin-bottom: 8px; cursor: pointer; } }
+.version-section { h3 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 300; color: #ccc; margin: 0 0 4px; } p { font-family: 'Poppins', sans-serif; font-size: 13px; color: #aaa; margin: 0 0 4px; } .licence { font-family: 'Poppins', sans-serif; font-size: 12px; color: var(--fundi-green); } }

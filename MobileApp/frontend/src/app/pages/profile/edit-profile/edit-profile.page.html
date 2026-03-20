@@ -1,0 +1,10 @@
+<ion-content [fullscreen]="true" class="edit-content" [scrollY]="true">
+  <div class="page-container">
+    <div class="header-row"><ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon><h1>Mon compte</h1></div>
+    <div *ngFor="let m of menuItems" class="menu-item" [class.danger]="m.danger" (click)="m.danger ? logout() : null">
+      <ion-icon [name]="m.icon"></ion-icon>
+      <span>{{ m.label }}</span>
+      <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,22 @@
+<ion-content [fullscreen]="true" class="hist-content" [scrollY]="true">
+  <div class="page-container">
+    <div class="header-row">
+      <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+      <h1>Historique de cotisations</h1>
+    </div>
+
+    <div *ngFor="let t of tontines" class="tontine-row">
+      <div class="tontine-left">
+        <div class="tontine-name-row">
+          <span class="tontine-name">{{ t.name }}</span>
+          <span class="status-badge" [class.en-cours]="t.status === 'En cours'" [class.termine]="t.status === 'Terminé'">{{ t.status }}</span>
+        </div>
+        <span class="tontine-duration"><ion-icon name="time-outline"></ion-icon> {{ t.duration }}</span>
+      </div>
+      <div class="tontine-right">
+        <span class="tontine-amount">{{ t.amount }}</span>
+        <span class="echec-badge" *ngIf="t.echec" [class.fail]="t.echec.includes('Échec')" [class.success]="t.echec === 'Aucun échec'">{{ t.echec }}</span>
+      </div>
+    </div>
+  </div>
+</ion-content>

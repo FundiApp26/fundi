@@ -1,0 +1,78 @@
+<ion-content [fullscreen]="true" class="gchat-content" [scrollY]="true">
+  <!-- Header -->
+  <div class="gchat-header">
+    <ion-icon name="arrow-back-outline" class="back" (click)="goBack()"></ion-icon>
+    <div class="group-avatar">
+      <ion-icon name="people" color="medium"></ion-icon>
+    </div>
+    <div class="group-info" (click)="openProfile()">
+      <span class="group-name">{{ groupName }}</span>
+      <span class="group-sub" *ngIf="!isTerminated">{{ groupSubtitle }}</span>
+      <span class="terminated-badge" *ngIf="isTerminated">Terminé</span>
+    </div>
+    <div class="header-icons">
+      <ion-icon name="cash-outline"></ion-icon>
+      <ion-icon name="list-outline" (click)="openProfile()"></ion-icon>
+      <ion-icon name="ellipsis-vertical"></ion-icon>
+    </div>
+  </div>
+
+  <!-- Messages -->
+  <div class="messages-area">
+    <!-- Empty state -->
+    <div class="empty-state" *ngIf="messages.length === 0">
+      <div class="empty-bubble"><span class="dots">●●●</span></div>
+      <p>Aucun échange</p>
+    </div>
+
+    <ng-container *ngFor="let msg of messages">
+      <!-- Date separator -->
+      <div class="date-sep" *ngIf="msg.date">
+        <span>{{ msg.date }}</span>
+      </div>
+
+      <!-- Message -->
+      <div class="message-row" [class.sent]="msg.sent" [class.received]="!msg.sent">
+        <div class="avatar-small" *ngIf="!msg.sent">
+          <ion-icon name="person" color="medium"></ion-icon>
+        </div>
+        <div class="msg-content">
+          <!-- Sender name (group chat) -->
+          <div class="sender-info" *ngIf="!msg.sent">
+            <span class="sender-phone" *ngIf="msg.senderPhone">{{ msg.senderPhone }}</span>
+            <span class="sender-name">{{ msg.sender }}</span>
+          </div>
+          <div class="bubble">
+            <p>{{ msg.text }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="msg-time" [class.sent]="msg.sent">{{ msg.time }}</div>
+    </ng-container>
+
+    <!-- Terminated banner -->
+    <div class="terminated-banner" *ngIf="isTerminated">
+      <p>La cotisation {{ groupName.replace('Cotisation ', '') }}Fcfa est terminée, vous pouvez créer une nouvelle ou alors la relancer</p>
+    </div>
+    <div class="relancer-link" *ngIf="isTerminated" (click)="relancerCotisation()">
+      Relancer la cotisation
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="gchat-footer" *ngIf="!isTerminated">
+  <div class="input-bar">
+    <div class="input-icons">
+      <ion-icon name="camera-outline"></ion-icon>
+      <ion-icon name="happy-outline"></ion-icon>
+      <ion-icon name="attach-outline"></ion-icon>
+    </div>
+    <input type="text" [(ngModel)]="messageText" placeholder="Tapez votre message" (keyup.enter)="sendMessage()" />
+    <div class="send-btn" (click)="sendMessage()">
+      <ion-icon name="send"></ion-icon>
+    </div>
+  </div>
+  <div class="pattern-footer">
+    <img src="assets/patterns/african-geometric-footer.svg" alt="" />
+  </div>
+</ion-footer>

@@ -1,0 +1,24 @@
+.payform-content { --background: #f8f8f8; }
+.page-container { padding: 16px; padding-top: calc(16px + var(--ion-safe-area-top, 0px)); }
+.card { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.card h2 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: var(--fundi-dark); margin: 0 0 20px; text-align: center; }
+.green-ico { color: var(--fundi-green); font-size: 16px; margin-right: 4px; }
+.amount-section { margin-bottom: 20px; }
+.amount-label { font-family: 'Poppins', sans-serif; font-size: 14px; color: var(--fundi-dark); margin: 0 0 8px; display: flex; align-items: center; }
+.amount-box { border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px; text-align: center; .amount-value { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: var(--fundi-dark); } }
+.operator-section { margin-bottom: 16px; }
+.op-label { font-family: 'Poppins', sans-serif; font-size: 14px; color: var(--fundi-dark); margin: 0 0 12px; display: flex; align-items: center; }
+.op-cards { display: flex; gap: 12px; margin-bottom: 8px; }
+.op-card { flex: 1; border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; img { width: 80px; height: 44px; object-fit: contain; } &.selected { border-color: var(--fundi-green); } .check-badge { position: absolute; top: -6px; left: -6px; width: 20px; height: 20px; background: var(--fundi-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; ion-icon { font-size: 12px; color: #fff; } } }
+.conf-name { font-family: 'Poppins', sans-serif; font-size: 13px; color: var(--fundi-green); margin: 8px 0 0; strong { font-weight: 600; } }
+.btn-main { --border-radius: 8px; --background: #4A7C42; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.btn-cancel { --border-radius: 8px; --border-color: #e0e0e0; --color: #888; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.instruction { font-family: 'Poppins', sans-serif; font-size: 12px; color: #aaa; font-style: italic; text-align: center; margin: 0; }
+
+// Modal
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 999; display: flex; align-items: center; justify-content: center; }
+.modal-backdrop { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); }
+.success-card { position: relative; z-index: 1; background: #fff; border-radius: 12px; padding: 32px 24px; margin: 16px; width: calc(100% - 32px); max-width: 340px; text-align: center; }
+.check-circle { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--fundi-green); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; ion-icon { font-size: 44px; color: var(--fundi-green); } }
+.success-text { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 500; color: var(--fundi-green); margin: 0 0 24px; }
+.outline-btn { --border-radius: 8px; --border-color: #e0e0e0; --color: #666; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; }
