@@ -1,30 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { ApiService } from '../../../services/api.service';
 
-@Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.page.html',
-  standalone: false,
-  styleUrls: ['./user-profile.page.scss'],
-})
-export class UserProfilePage {
-  isAdmin = true;
-  user = {
-    name: 'Steph Happi',
-    avatar: '',
-    phone1: '+237 691 568 741',
-    phone2: '+237 678 253 644',
-    stats: { total: 10, enCours: 2, succes: 6, echec: 2 },
-    montantHaut: '20 000 Fcfa',
-    montantBas: '3 500 Fcfa',
-    cote: '12/20',
-  };
+@Component({ selector: 'app-user-profile', templateUrl: './user-profile.page.html', standalone: false, styleUrls: ['./user-profile.page.scss'] })
+export class UserProfilePage implements OnInit {
+  isAdmin = false;
+  user: any = { firstName: '', lastName: '', phone: '', avatarUrl: '', stats: { total: 0, enCours: 0, succes: 0, echec: 0, montantHaut: 0, montantBas: 0, cote: 0 } };
+  groupsEnCommun: any[] = [];
 
-  groupsEnCommun = [
-    { name: 'Cotisation 5000fcfa', members: 'Declo, Stéphane, Dody, Benoit, François, Popy, Yvest...' },
-    { name: 'Cotisation 2000fcfa', members: 'Declo, Stéphane, Dody, Benoit, François, Popy, Yvest...' },
-  ];
+  constructor(private route: ActivatedRoute, private location: Location, private api: ApiService) {}
 
-  constructor(private location: Location) {}
+  ngOnInit() {
+    const userId = this.route.snapshot.queryParams['id'] || '';
+    if (userId) {
+      this.api.get<any>(`users/${userId}`).subscribe({
+        next: (u) => {
+          this.user = u;
+          this.isAdmin = u.isAdmin || false;
+          this.groupsEnCommun = u.groupsEnCommun || [];
+        }
+      });
+    }
+  }
+
   goBack() { this.location.back(); }
 }

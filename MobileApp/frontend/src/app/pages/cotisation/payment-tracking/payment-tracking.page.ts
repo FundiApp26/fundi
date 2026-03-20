@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { ApiService } from '../../../services/api.service';
 
 interface MemberItem { num: number; name: string; date: string; checked: boolean; amount?: string; detail?: string; status?: string; isBeneficiary?: boolean; }
 
@@ -9,44 +11,57 @@ interface MemberItem { num: number; name: string; date: string; checked: boolean
   standalone: false,
   styleUrls: ['./payment-tracking.page.scss'],
 })
-export class PaymentTrackingPage {
+export class PaymentTrackingPage implements OnInit {
+  cotisationId = '';
   view: 'members' | 'tracking' = 'members';
   searchQuery = '';
   showDetail = false;
   detailMember: MemberItem | null = null;
+  members: MemberItem[] = [];
+  tracking: MemberItem[] = [];
 
-  members: MemberItem[] = [
-    { num: 1, name: 'Stéphane', date: '03 Juillet', checked: true },
-    { num: 2, name: 'Benoit Marie', date: '10 Juillet', checked: true },
-    { num: 3, name: 'WABO Franço...', date: '25 Juillet', checked: true },
-    { num: 4, name: 'Mpoul Dodji', date: '03 Août', checked: false },
-    { num: 5, name: 'Ankaramora', date: '10 Août', checked: false },
-    { num: 6, name: 'Onguene landry', date: '25 Août', checked: false },
-    { num: 7, name: 'Ankaramora', date: '03 Septembre', checked: false },
-    { num: 8, name: 'Nodem Bilota', date: '10 Septembre', checked: false },
-    { num: 9, name: 'Mélenchon Duplex', date: '25 Septembre', checked: false },
-  ];
+  constructor(private route: ActivatedRoute, private location: Location, private api: ApiService) {}
 
-  tracking: MemberItem[] = [
-    { num: 1, name: 'Stéphane', date: '16-12-23 - 07:12m', checked: true, amount: '20.000FCFA', detail: 'Detail du dépôt' },
-    { num: 2, name: 'Benoit Marie', date: '16-12-23 - 07:12m', checked: true, amount: '10.000FCFA', detail: 'Detail du dépôt' },
-    { num: 3, name: 'WABO Franço...', date: '16-12-23 - 07:12m', checked: true, amount: '5.000FCFA', detail: 'Dépôt externe' },
-    { num: 4, name: 'Mpoul Dodji', date: '16-12-23 - 07:12m', checked: false, isBeneficiary: true },
-    { num: 5, name: 'Ankaramora', date: '16-12-23 - 12:20m', checked: true, amount: '10.000FCFA', detail: 'Detail du dépôt' },
-    { num: 6, name: 'Popy', date: '16-12-23 - 20:20m', checked: false, status: 'En attente' },
-    { num: 7, name: 'Achile Achile', date: '16-12-23 - 20:20m', checked: false, status: 'En attente' },
-    { num: 8, name: 'Djeumeni Paola', date: '16-12-23 - 20:20m', checked: false, status: 'En attente' },
-  ];
-
-  constructor(private location: Location) {}
-  goBack() { this.location.back(); }
-
-  switchView(v: 'members' | 'tracking') { this.view = v; }
-
-  openDetail(m: MemberItem) {
-    this.detailMember = m;
-    this.showDetail = true;
+  ngOnInit() {
+    this.cotisationId = this.route.snapshot.queryParams['id'] || '';
+    if (this.cotisationId) this.loadData();
   }
 
+  loadData() {
+    this.api.get<any>(`cotisations/${this.cotisationId}`).subscribe({
+      next: (c) => {
+        this.members = (c.members || []).map((m: any, i: number) => ({
+          num: i + 1,
+          name: m.user.firstName + ' ' + (m.user.lastName || ''),
+          date: '',
+          checked: false,
+        }));
+
+        // Load tours for tracking view
+        this.api.get<any[]>(`cotisations/${this.cotisationId}/tours`).subscribe({
+          next: (tours) => {
+            this.tracking = (tours || []).map((t: any) => ({
+              num: t.tourNumber,
+              name: t.beneficiary ? t.beneficiary.firstName + ' ' + t.beneficiary.lastName : 'TBD',
+              date: new Date(t.scheduledDate).toLocaleDateString('fr-FR'),
+              checked: t.status === 'completed',
+              status: t.status,
+              isBeneficiary: true,
+            }));
+
+            // Update members with tour dates
+            this.members.forEach((m, i) => {
+              const tour = (tours || []).find((t: any) => t.tourNumber === i + 1);
+              if (tour) m.date = new Date(tour.scheduledDate).toLocaleDateString('fr-FR', { day: '2-digit', month: 'long' });
+            });
+          }
+        });
+      }
+    });
+  }
+
+  goBack() { this.location.back(); }
+  switchView(v: 'members' | 'tracking') { this.view = v; }
+  openDetail(m: MemberItem) { this.detailMember = m; this.showDetail = true; }
   closeDetail() { this.showDetail = false; this.detailMember = null; }
 }

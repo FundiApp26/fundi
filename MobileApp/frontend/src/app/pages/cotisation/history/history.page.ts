@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { ApiService } from '../../../services/api.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-history',
@@ -7,14 +9,29 @@ import { Location } from '@angular/common';
   standalone: false,
   styleUrls: ['./history.page.scss'],
 })
-export class HistoryPage {
-  tontines = [
-    { name: 'Tontine 4', status: 'En cours', amount: '5000 Fcfa/s', duration: '7 Mois', echec: '' },
-    { name: 'Tontine 3', status: 'Terminé', amount: '5000 Fcfa/s', duration: '6 Mois', echec: 'Échec 1' },
-    { name: 'Tontine 2', status: 'Terminé', amount: '5000 Fcfa/s', duration: '4 Mois', echec: 'Aucun échec' },
-    { name: 'Tontine 1', status: 'Terminé', amount: '5000 Fcfa/s', duration: '2 Mois', echec: 'Aucun échec' },
-  ];
+export class HistoryPage implements OnInit {
+  tontines: any[] = [];
 
-  constructor(private location: Location) {}
+  constructor(private location: Location, private api: ApiService, private auth: AuthService) {}
+
+  ngOnInit() {
+    this.api.get<any[]>('cotisations').subscribe({
+      next: (list) => {
+        this.tontines = (list || []).map((c, i) => ({
+          name: c.name || 'Tontine ' + (i + 1),
+          status: c.status === 'active' ? 'En cours' : 'Terminé',
+          amount: (c.amount || 0).toLocaleString('fr-FR') + ' Fcfa/s',
+          duration: '',
+          echec: c.status === 'completed' ? 'Aucun échec' : '',
+        }));
+      },
+      error: () => {
+        this.tontines = [
+          { name: 'Tontine 1', status: 'Terminé', amount: '5000 Fcfa/s', duration: '2 Mois', echec: 'Aucun échec' },
+        ];
+      }
+    });
+  }
+
   goBack() { this.location.back(); }
 }

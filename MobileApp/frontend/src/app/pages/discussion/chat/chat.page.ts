@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { ApiService } from '../../../services/api.service';
+import { AuthService } from '../../../services/auth.service';
 
-interface Message {
-  text: string;
-  time: string;
-  sent: boolean;
-  date?: string;
-}
+interface Message { text: string; time: string; sent: boolean; date?: string; }
 
 @Component({
   selector: 'app-chat',
@@ -16,54 +13,55 @@ interface Message {
   styleUrls: ['./chat.page.scss'],
 })
 export class ChatPage implements OnInit {
-  contactName = 'Steph Happi';
+  discussionId = '';
+  contactName = 'Contact';
   contactAvatar = '';
   messageText = '';
   showSendMoney = false;
   showSuccess = false;
   sendAmount = '';
   selectedOperator: 'om' | 'momo' | null = null;
-  confirmationName = 'Onana mbarga jean';
+  confirmationName = '';
+  messages: Message[] = [];
+  currentUserId = '';
 
-  messages: Message[] = [
-    { text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", time: '23 : 12', sent: false },
-    { text: "Ha d'accord", time: '23 : 32', sent: true },
-    { text: "Bonjour ! Comment tu vas ?", time: '07 : 18', sent: false, date: "Aujourd'hui" },
-    { text: "Bonjour Nadine", time: '07 : 48', sent: true },
-  ];
+  constructor(private route: ActivatedRoute, private location: Location, private api: ApiService, private auth: AuthService) {}
 
-  constructor(private route: ActivatedRoute, private location: Location) {}
+  async ngOnInit() {
+    this.discussionId = this.route.snapshot.queryParams['id'] || '';
+    this.contactName = this.route.snapshot.queryParams['name'] || 'Contact';
+    const user = await this.auth.getUser();
+    this.currentUserId = user?.id || '';
 
-  ngOnInit() {
-    const name = this.route.snapshot.queryParams['name'];
-    if (name) this.contactName = name;
+    if (this.discussionId) this.loadMessages();
+  }
+
+  loadMessages() {
+    this.api.get<any[]>(`discussions/${this.discussionId}/messages`).subscribe({
+      next: (msgs) => {
+        this.messages = (msgs || []).map(m => ({
+          text: m.content || '',
+          time: new Date(m.createdAt).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
+          sent: m.sender?.id === this.currentUserId,
+        }));
+      }
+    });
   }
 
   goBack() { this.location.back(); }
 
   sendMessage() {
-    if (this.messageText.trim()) {
-      this.messages.push({
-        text: this.messageText.trim(),
-        time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
-        sent: true,
-      });
-      this.messageText = '';
+    if (!this.messageText.trim()) return;
+    const text = this.messageText.trim();
+    this.messageText = '';
+    this.messages.push({ text, time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }), sent: true });
+
+    if (this.discussionId) {
+      this.api.post(`discussions/${this.discussionId}/messages`, { content: text }).subscribe();
     }
   }
 
-  openSendMoney() {
-    this.showSendMoney = true;
-    this.sendAmount = '';
-    this.selectedOperator = null;
-  }
-
-  confirmSendMoney() {
-    this.showSendMoney = false;
-    this.showSuccess = true;
-  }
-
-  closeSuccess() {
-    this.showSuccess = false;
-  }
+  openSendMoney() { this.showSendMoney = true; this.sendAmount = ''; this.selectedOperator = null; }
+  confirmSendMoney() { this.showSendMoney = false; this.showSuccess = true; }
+  closeSuccess() { this.showSuccess = false; }
 }
