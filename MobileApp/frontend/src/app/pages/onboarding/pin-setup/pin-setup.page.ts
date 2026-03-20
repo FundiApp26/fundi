@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { StorageService } from '../../../services/storage.service';
 import { AuthService } from '../../../services/auth.service';
+import { SocketService } from '../../../services/socket.service';
 
 @Component({
   selector: 'app-pin-setup',
@@ -23,7 +24,7 @@ export class PinSetupPage implements OnInit {
 
   constructor(
     private router: Router, private location: Location,
-    private storage: StorageService, private auth: AuthService
+    private storage: StorageService, private auth: AuthService, private socket: SocketService
   ) {}
 
   async ngOnInit() {
@@ -89,9 +90,10 @@ export class PinSetupPage implements OnInit {
         omNumber, omConfirmName, momoNumber, momoConfirmName,
         pin: this.pinValue,
       }).subscribe({
-        next: () => {
+        next: async () => {
           this.loading = false;
           this.phase = 'success';
+          await this.socket.connect();
           setTimeout(() => this.router.navigate(['/tabs'], { replaceUrl: true }), 2500);
         },
         error: (err) => {

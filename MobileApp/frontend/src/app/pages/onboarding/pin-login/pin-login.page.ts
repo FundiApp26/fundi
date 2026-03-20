@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 import { StorageService } from '../../../services/storage.service';
+import { SocketService } from '../../../services/socket.service';
 
 @Component({
   selector: 'app-pin-login',
@@ -23,7 +24,7 @@ export class PinLoginPage implements OnInit {
     [{ d: '+', sub: '' }, { d: '0', sub: '' }, { d: 'back', sub: '' }],
   ];
 
-  constructor(private router: Router, private location: Location, private auth: AuthService, private storage: StorageService) {}
+  constructor(private router: Router, private location: Location, private auth: AuthService, private storage: StorageService, private socket: SocketService) {}
 
   async ngOnInit() {
     // Get stored phone from previous OTP verification
@@ -50,8 +51,9 @@ export class PinLoginPage implements OnInit {
     this.loading = true;
 
     this.auth.login(this.userPhone, this.pinValue).subscribe({
-      next: () => {
+      next: async () => {
         this.loading = false;
+        await this.socket.connect();
         this.router.navigate(['/tabs'], { replaceUrl: true });
       },
       error: (err) => {

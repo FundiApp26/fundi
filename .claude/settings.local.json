@@ -98,7 +98,8 @@
       "WebFetch(domain:developers.brevo.com)",
       "WebFetch(domain:firebase.google.com)",
       "WebFetch(domain:www.my-dohone.com)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(\"$ADB\" devices:*)"
     ]
   }
 }

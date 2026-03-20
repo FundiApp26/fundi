@@ -1,13 +1,32 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>calendar</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="cal-content" [scrollY]="true">
+  <div class="page-container">
+    <div class="header-row">
+      <ion-icon name="arrow-back-outline" (click)="goBack()"></ion-icon>
+      <h1>Calendrier</h1>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">calendar</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <p class="subtitle" *ngIf="cotisationName">{{ cotisationName }}</p>
+
+    <div *ngIf="tours.length === 0" class="empty">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <p>Aucun tour planifié</p>
+    </div>
+
+    <div *ngFor="let t of tours" class="tour-card" [class.today]="isToday(t.date)" [class.past]="isPast(t.date) && !isToday(t.date)">
+      <div class="tour-date">
+        <span class="day">{{ t.date.getDate() }}</span>
+        <span class="month">{{ t.date.toLocaleDateString('fr-FR', {month: 'short'}) }}</span>
+      </div>
+      <div class="tour-info">
+        <span class="tour-title">Tour {{ t.number }}</span>
+        <span class="tour-beneficiary">{{ t.beneficiary }}</span>
+        <span class="tour-full-date">{{ formatDate(t.date) }}</span>
+      </div>
+      <div class="tour-status">
+        <span class="badge" [class.active]="t.status === 'active'" [class.completed]="t.status === 'completed'" [class.upcoming]="t.status === 'upcoming'">
+          {{ t.status === 'active' ? 'En cours' : t.status === 'completed' ? 'Terminé' : 'À venir' }}
+        </span>
+      </div>
+    </div>
+  </div>
 </ion-content>

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { Subscription } from 'rxjs';
 import { ApiService } from '../../../services/api.service';
 import { AuthService } from '../../../services/auth.service';
+import { SocketService } from '../../../services/socket.service';
 
-interface Message { id?: string; text: string; time: string; sent: boolean; sender?: string; senderPhone?: string; date?: string; }
+interface Message { text: string; time: string; sent: boolean; sender?: string; senderPhone?: string; date?: string; }
 
 @Component({
   selector: 'app-chat',
@@ -12,16 +14,21 @@ interface Message { id?: string; text: string; time: string; sent: boolean; send
   standalone: false,
   styleUrls: ['./chat.page.scss'],
 })
-export class ChatPage implements OnInit {
+export class ChatPage implements OnInit, OnDestroy {
   groupId = '';
-  groupName = 'Cotisation 50.000';
+  groupName = 'Cotisation';
   groupSubtitle = 'Voir les détails du groupe';
   isTerminated = false;
   messageText = '';
   messages: Message[] = [];
   currentUserId = '';
+  private msgSub?: Subscription;
+  private sysSub?: Subscription;
 
-  constructor(private route: ActivatedRoute, private router: Router, private location: Location, private api: ApiService, private auth: AuthService) {}
+  constructor(
+    private route: ActivatedRoute, private router: Router, private location: Location,
+    private api: ApiService, private auth: AuthService, private socket: SocketService
+  ) {}
 
   async ngOnInit() {
     this.groupId = this.route.snapshot.queryParams['id'] || '';
@@ -32,15 +39,33 @@ export class ChatPage implements OnInit {
     if (this.groupId) {
       this.loadMessages();
       this.loadCotisationInfo();
+
+      // Real-time messages
+      this.msgSub = this.socket.onNewMessage().subscribe(msg => {
+        if (msg.cotisationId === this.groupId && msg.sender?.id !== this.currentUserId) {
+          this.messages.push({
+            text: msg.content || '', sender: msg.sender?.firstName + ' ' + msg.sender?.lastName,
+            senderPhone: msg.sender?.phone,
+            time: new Date(msg.createdAt).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
+            sent: false,
+          });
+        }
+      });
+
+      // System messages (payment notifications)
+      this.sysSub = this.socket.onSystemMessage().subscribe(msg => {
+        if (msg.cotisationId === this.groupId) {
+          this.messages.push({ text: msg.content, time: '', sent: false, sender: 'Système' });
+        }
+      });
     }
   }
 
+  ngOnDestroy() { this.msgSub?.unsubscribe(); this.sysSub?.unsubscribe(); }
+
   loadCotisationInfo() {
     this.api.get<any>(`cotisations/${this.groupId}`).subscribe({
-      next: (c) => {
-        this.groupName = c.name;
-        this.isTerminated = c.status === 'completed';
-      }
+      next: (c) => { this.groupName = c.name; this.isTerminated = c.status === 'completed'; }
     });
   }
 
@@ -48,16 +73,11 @@ export class ChatPage implements OnInit {
     this.api.get<any[]>(`messages/cotisation/${this.groupId}`).subscribe({
       next: (msgs) => {
         this.messages = (msgs || []).map(m => ({
-          id: m.id,
-          text: m.content || '',
+          text: m.content || '', sender: m.sender ? m.sender.firstName + ' ' + m.sender.lastName : '',
+          senderPhone: m.sender?.phone,
           time: new Date(m.createdAt).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
           sent: m.sender?.id === this.currentUserId,
-          sender: m.sender ? m.sender.firstName + ' ' + m.sender.lastName : '',
-          senderPhone: m.sender?.phone,
         }));
-      },
-      error: () => {
-        // Keep empty if API fails
       }
     });
   }
@@ -71,12 +91,14 @@ export class ChatPage implements OnInit {
     const text = this.messageText.trim();
     this.messageText = '';
 
+    // Send via Socket
+    this.socket.sendCotisationMessage(this.groupId, text);
+
+    // REST fallback
+    this.api.post(`messages/cotisation/${this.groupId}`, { content: text }).subscribe();
+
     // Optimistic UI
     this.messages.push({ text, time: new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }), sent: true });
-
-    if (this.groupId) {
-      this.api.post(`messages/cotisation/${this.groupId}`, { content: text }).subscribe();
-    }
   }
 
   relancerCotisation() { this.isTerminated = false; }

@@ -4,106 +4,101 @@ import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 
-export interface ChatMessage {
-  id: string;
-  roomId: string;
-  senderId: string;
-  senderName: string;
-  content: string;
-  timestamp: string;
-  type: 'text' | 'image' | 'system';
-}
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class SocketService implements OnDestroy {
-
   private socket: Socket | null = null;
   private destroy$ = new Subject<void>();
 
   constructor(private authService: AuthService) {}
 
   async connect(): Promise<void> {
+    if (this.socket?.connected) return;
+
     const token = await this.authService.getToken();
-    if (!token) {
-      console.warn('SocketService: No auth token, skipping connection');
-      return;
-    }
+    if (!token) return;
 
     this.socket = io(environment.socketUrl, {
       auth: { token },
       transports: ['websocket'],
-      autoConnect: true
+      autoConnect: true,
     });
 
-    this.socket.on('connect', () => {
-      console.log('Socket connected:', this.socket?.id);
-    });
-
-    this.socket.on('disconnect', (reason) => {
-      console.log('Socket disconnected:', reason);
-    });
-
-    this.socket.on('connect_error', (error) => {
-      console.error('Socket connection error:', error.message);
-    });
+    this.socket.on('connect', () => console.log('[Socket] Connected:', this.socket?.id));
+    this.socket.on('disconnect', (r) => console.log('[Socket] Disconnected:', r));
+    this.socket.on('connect_error', (e) => console.error('[Socket] Error:', e.message));
   }
 
   disconnect(): void {
-    if (this.socket) {
-      this.socket.disconnect();
-      this.socket = null;
-    }
+    this.socket?.disconnect();
+    this.socket = null;
   }
 
-  joinRoom(roomId: string): void {
-    this.socket?.emit('join-room', { roomId });
+  // Send discussion message (real-time)
+  sendDiscussionMessage(discussionId: string, content: string, mediaUrl?: string) {
+    this.socket?.emit('send_discussion_message', { discussionId, content, mediaUrl });
   }
 
-  leaveRoom(roomId: string): void {
-    this.socket?.emit('leave-room', { roomId });
+  // Send cotisation group message (real-time)
+  sendCotisationMessage(cotisationId: string, content: string, mediaUrl?: string) {
+    this.socket?.emit('send_cotisation_message', { cotisationId, content, mediaUrl });
   }
 
-  sendMessage(roomId: string, content: string, type: 'text' | 'image' = 'text'): void {
-    this.socket?.emit('send-message', { roomId, content, type });
+  // Typing indicators
+  startTyping(roomId: string, roomType: 'discussion' | 'cotisation') {
+    this.socket?.emit('typing', { roomId, roomType });
   }
 
-  onMessage(): Observable<ChatMessage> {
-    return new Observable<ChatMessage>(observer => {
-      if (!this.socket) {
-        observer.error('Socket not connected');
-        return;
-      }
-      this.socket.on('new-message', (message: ChatMessage) => {
-        observer.next(message);
-      });
-      return () => {
-        this.socket?.off('new-message');
-      };
+  stopTyping(roomId: string, roomType: 'discussion' | 'cotisation') {
+    this.socket?.emit('stop_typing', { roomId, roomType });
+  }
+
+  // Listen for new messages
+  onNewMessage(): Observable<any> {
+    return new Observable(observer => {
+      this.socket?.on('new_message', (msg) => observer.next(msg));
+      return () => this.socket?.off('new_message');
     });
   }
 
-  onEvent<T = unknown>(event: string): Observable<T> {
-    return new Observable<T>(observer => {
-      if (!this.socket) {
-        observer.error('Socket not connected');
-        return;
-      }
-      this.socket.on(event, (data: T) => {
-        observer.next(data);
-      });
-      return () => {
-        this.socket?.off(event);
-      };
+  // Listen for typing
+  onUserTyping(): Observable<{ userId: string; roomId: string }> {
+    return new Observable(observer => {
+      this.socket?.on('user_typing', (data) => observer.next(data));
+      return () => this.socket?.off('user_typing');
     });
   }
 
-  emit(event: string, data: unknown): void {
-    this.socket?.emit(event, data);
+  onUserStopTyping(): Observable<{ userId: string; roomId: string }> {
+    return new Observable(observer => {
+      this.socket?.on('user_stop_typing', (data) => observer.next(data));
+      return () => this.socket?.off('user_stop_typing');
+    });
   }
 
-  ngOnDestroy(): void {
+  // Online status
+  onUserOnline(): Observable<{ userId: string }> {
+    return new Observable(observer => {
+      this.socket?.on('user_online', (data) => observer.next(data));
+      return () => this.socket?.off('user_online');
+    });
+  }
+
+  onUserOffline(): Observable<{ userId: string }> {
+    return new Observable(observer => {
+      this.socket?.on('user_offline', (data) => observer.next(data));
+      return () => this.socket?.off('user_offline');
+    });
+  }
+
+  // System messages (payment notifications in cotisation)
+  onSystemMessage(): Observable<any> {
+    return new Observable(observer => {
+      this.socket?.on('system_message', (msg) => observer.next(msg));
+      return () => this.socket?.off('system_message');
+    });
+  }
+
+  ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
     this.disconnect();
