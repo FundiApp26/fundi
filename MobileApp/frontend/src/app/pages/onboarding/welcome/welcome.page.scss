@@ -2,74 +2,79 @@
 
 .welcome-container {
   display: flex; flex-direction: column; align-items: center;
-  height: 100%; padding: 0 32px 63px;
+  height: 100%; padding: 0 32px;
   padding-top: calc(8vh + var(--ion-safe-area-top, 0px));
+  padding-bottom: calc(15vh + var(--ion-safe-area-bottom, 0px));
 }
 
+// Logo droit
 .logo-section {
-  display: flex; flex-direction: column; align-items: center;
   margin-bottom: 3vh;
-}
 
-.logo-icon-wrapper {
-  width: min(30vw, 120px); height: min(30vw, 120px);
-  margin-bottom: 8px; overflow: hidden;
-  display: flex; align-items: flex-start; justify-content: flex-end;
-
-  .logo-icon {
-    width: 200%; height: 200%; object-fit: contain;
-    margin-top: -20%; margin-right: -25%;
+  .logo-img {
+    width: min(45vw, 180px);
+    height: auto;
+    object-fit: contain;
   }
 }
 
-.brand-name {
-  font-family: 'Poppins', sans-serif;
-  font-size: clamp(16px, 5vw, 20px);
-  font-weight: 700; color: var(--fundi-green);
-  letter-spacing: 3px; margin: 0;
-}
-
-.brand-slogan {
-  font-family: 'Poppins', sans-serif;
-  font-size: clamp(9px, 2.5vw, 11px);
-  font-weight: 500; color: var(--fundi-orange);
-  letter-spacing: 2px; margin: 4px 0 0;
-}
-
+// Welcome text
 .welcome-text {
   margin-bottom: 2vh;
 
   h1 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: clamp(22px, 7vw, 30px);
-    font-weight: 600; color: var(--fundi-dark);
-    text-align: center; line-height: 1.3; margin: 0;
+    font-weight: 600;
+    color: #535353;
+    text-align: center;
+    line-height: 1.3;
+    margin: 0;
   }
 }
 
 .spacer { flex: 1; }
 
+// Legal text
 .legal-links {
   margin-bottom: 20px; padding: 0 8px;
+
   p {
-    font-family: 'Poppins', sans-serif; font-size: 13px;
-    color: #666; text-align: center; line-height: 1.6; margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: #2C2627;
+    text-align: center;
+    line-height: 1.6;
+    margin: 0;
   }
-  a { color: var(--fundi-green); text-decoration: none; font-weight: 500; }
+
+  a {
+    color: var(--fundi-green);
+    text-decoration: none;
+    font-weight: 600;
+  }
 }
 
+// Button
 .action-section {
   width: 100%;
+
   .accept-btn {
-    --border-radius: 8px; --padding-top: 16px; --padding-bottom: 16px;
+    --border-radius: 8px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
     --background: #53893D;
-    font-family: 'Poppins', sans-serif; font-size: 14px;
-    font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;
     --box-shadow: 0px 4px 23px #A8D496;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
   }
 }
 
+// Bande africaine
 .pattern-footer {
-  position: fixed; bottom: 0; left: 0; right: 0; height: 63px; overflow: hidden;
-  img { width: 100%; height: 100%; object-fit: cover; }
+  position: fixed; bottom: 0; left: 0; right: 0;
+  img { width: 100%; height: auto; display: block; }
 }

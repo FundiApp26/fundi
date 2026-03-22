@@ -10,7 +10,8 @@ import { Capacitor } from '@capacitor/core';
   styleUrls: ['./splash.page.scss'],
 })
 export class SplashPage implements OnInit {
-  phase: 'logo' | 'name' | 'slogan' = 'logo';
+  // Phase 1: tilted logo → Phase 2: straight logo → Phase 3: logo + slogan
+  phase: 'tilted' | 'straight' | 'slogan' = 'tilted';
 
   constructor(private router: Router) {}
 
@@ -20,17 +21,17 @@ export class SplashPage implements OnInit {
       await StatusBar.setBackgroundColor({ color: '#ffffff' });
     }
 
-    // Phase 1: Logo only (1.5s)
+    // Phase 1: Tilted logo (1.5s)
     setTimeout(() => {
-      this.phase = 'name';
+      this.phase = 'straight';
     }, 1500);
 
-    // Phase 2: Logo + Name (1.5s)
+    // Phase 2: Straight logo (1.5s)
     setTimeout(() => {
       this.phase = 'slogan';
     }, 3000);
 
-    // Phase 3: Logo + Name + Slogan (1.5s) then navigate
+    // Phase 3: Logo + slogan (1.5s) then navigate
     setTimeout(() => {
       this.router.navigate(['/onboarding'], { replaceUrl: true });
     }, 4500);

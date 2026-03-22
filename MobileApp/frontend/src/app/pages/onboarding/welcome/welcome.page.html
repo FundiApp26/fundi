@@ -1,13 +1,9 @@
 <ion-content [fullscreen]="true" class="welcome-content" [scrollY]="false">
   <div class="welcome-container">
 
-    <!-- Logo section: icon + text composed vertically -->
+    <!-- Logo droit -->
     <div class="logo-section">
-      <div class="logo-icon-wrapper">
-        <img src="assets/logo/logo-full.png" alt="Fundi" class="logo-icon" />
-      </div>
-      <h2 class="brand-name">COMMON SAFE</h2>
-      <p class="brand-slogan">TONTINER AUTREMENT</p>
+      <img src="assets/logo/logo-straight.png" alt="Fundi" class="logo-img" />
     </div>
 
     <!-- Welcome text -->
@@ -27,14 +23,15 @@
 
     <!-- Accept button -->
     <div class="action-section">
-      <ion-button expand="block" color="primary" class="accept-btn" (click)="acceptAndContinue()">
+      <ion-button expand="block" class="accept-btn" (click)="acceptAndContinue()">
         ACCEPTER ET CONTINUER
       </ion-button>
     </div>
 
   </div>
 
+  <!-- Bande africaine -->
   <div class="pattern-footer">
-    <img src="assets/patterns/african-geometric-footer.svg" alt="" />
+    <img src="assets/patterns/bande-africaine-footer.png" alt="" />
   </div>
 </ion-content>

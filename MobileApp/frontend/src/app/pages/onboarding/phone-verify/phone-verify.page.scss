@@ -2,7 +2,7 @@
 
 .page-container {
   display: flex; flex-direction: column;
-  height: 100%; padding: 0 24px 80px;
+  height: 100%; padding: 0 24px;
   padding-top: calc(16px + var(--ion-safe-area-top, 0px));
 }
 
@@ -15,8 +15,8 @@
   margin-bottom: 40px; text-align: center;
 
   h1 {
-    font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 600;
-    color: var(--fundi-dark); margin: 0 0 16px;
+    font-family: 'Open Sans', sans-serif; font-size: 24px; font-weight: 600;
+    color: #535353; margin: 0 0 16px;
   }
 
   .subtitle {
@@ -75,7 +75,7 @@
     --border-radius: 8px;
     --padding-top: 16px;
     --padding-bottom: 16px;
-    --background: #53893D;
+    --background: #53893D; --box-shadow: 0px 4px 23px #A8D496;
     font-family: 'Poppins', sans-serif;
     font-size: 14px; font-weight: 600;
     letter-spacing: 0.5px;
@@ -101,12 +101,12 @@
 
   .modal-text {
     font-family: 'Poppins', sans-serif; font-size: 15px;
-    color: var(--fundi-dark); margin: 0 0 8px;
+    color: #535353; margin: 0 0 8px;
   }
 
   .modal-number {
     font-family: 'Poppins', sans-serif; font-size: 17px;
-    font-weight: 700; color: var(--fundi-dark); margin: 0 0 12px;
+    font-weight: 700; color: #535353; margin: 0 0 12px;
   }
 
   .modal-question {
@@ -119,12 +119,12 @@
 
     .modal-btn {
       flex: 1; --border-radius: 8px;
-      font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600;
+      font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 400;
       height: 44px;
     }
 
     .yes-btn {
-      --background: #53893D;
+      --background: #53893D; --box-shadow: 0px 4px 23px #A8D496;
       --color: #fff;
     }
 
@@ -135,6 +135,6 @@
 }
 
 .pattern-footer {
-  position: fixed; bottom: 0; left: 0; right: 0; height: 63px; overflow: hidden;
-  img { width: 100%; height: 100%; object-fit: cover; }
+  position: fixed; bottom: 0; left: 0; right: 0;
+  img { width: 100%; height: auto; display: block; }
 }

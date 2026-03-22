@@ -99,7 +99,8 @@
       "WebFetch(domain:firebase.google.com)",
       "WebFetch(domain:www.my-dohone.com)",
       "WebFetch(domain:github.com)",
-      "Bash(\"$ADB\" devices:*)"
+      "Bash(\"$ADB\" devices:*)",
+      "Bash(ls -d */)"
     ]
   }
 }

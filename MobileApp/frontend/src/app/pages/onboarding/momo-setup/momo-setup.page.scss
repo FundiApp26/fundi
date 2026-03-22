@@ -1,7 +1,7 @@
 .momo-content { --background: #ffffff; }
 
 .page-container {
-  padding: 0 24px 80px;
+  padding: 0 24px;
   padding-top: calc(16px + var(--ion-safe-area-top, 0px));
 }
 
@@ -11,13 +11,13 @@
 }
 
 h1 {
-  font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 600;
-  color: var(--fundi-dark); margin: 0 0 8px; text-align: center;
+  font-family: 'Open Sans', sans-serif; font-size: 24px; font-weight: 600;
+  color: #535353; margin: 0 0 8px; text-align: center;
 }
 
 .subtitle {
   font-family: 'Poppins', sans-serif; font-size: 14px;
-  color: #888; margin: 0 0 28px; line-height: 1.5; text-align: center;
+  color: #2C2627; margin: 0 0 28px; line-height: 1.5; text-align: center;
 }
 
 .field-group {
@@ -54,13 +54,13 @@ h1 {
   margin-top: 28px;
   .action-btn {
     --border-radius: 8px; --padding-top: 16px; --padding-bottom: 16px;
-    --background: #53893D;
+    --background: #53893D; --box-shadow: 0px 4px 23px #A8D496;
     font-family: 'Poppins', sans-serif; font-size: 13px;
     font-weight: 600; letter-spacing: 0.3px;
   }
 }
 
 .pattern-footer {
-  position: fixed; bottom: 0; left: 0; right: 0; height: 63px; overflow: hidden;
-  img { width: 100%; height: 100%; object-fit: cover; }
+  position: fixed; bottom: 0; left: 0; right: 0;
+  img { width: 100%; height: auto; display: block; }
 }

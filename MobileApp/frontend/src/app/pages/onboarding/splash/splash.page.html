@@ -1,19 +1,21 @@
 <ion-content [fullscreen]="true" class="splash-content" [scrollY]="false">
   <div class="splash-container">
-    <!-- Logo icon -->
-    <div class="logo-wrapper" [class.with-name]="phase !== 'logo'">
-      <img src="assets/logo/logo-full.png" alt="Common Safe" class="logo-icon" />
+
+    <!-- Phase 1: Tilted logo -->
+    <div class="logo-tilted" *ngIf="phase === 'tilted'">
+      <img src="assets/logo/logo-full.png" alt="Common Safe" />
     </div>
 
-    <!-- App name -->
-    <div class="app-name" [class.visible]="phase === 'name' || phase === 'slogan'">
-      <h1>COMMON SAFE</h1>
+    <!-- Phase 2 & 3: Straight logo -->
+    <div class="logo-straight" *ngIf="phase !== 'tilted'">
+      <img src="assets/logo/logo-straight.png" alt="Common Safe" />
     </div>
 
-    <!-- Slogan -->
+    <!-- Phase 3: Slogan -->
     <div class="slogan" [class.visible]="phase === 'slogan'">
-      <p>TONTINER AUTREMENT</p>
+      <p>GÉREZ FACILEMENT VOS TONTINES,<br/>EN TOUTE SÉCURITÉ</p>
     </div>
+
   </div>
 
   <!-- African pattern footer -->
