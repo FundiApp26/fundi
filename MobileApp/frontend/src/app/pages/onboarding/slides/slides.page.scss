@@ -122,7 +122,7 @@ swiper-slide {
   justify-content: center;
   gap: 2px;
   cursor: pointer;
-  padding-bottom: calc(24px + var(--ion-safe-area-bottom, 0px));
+  padding-bottom: 8px;
 
   span {
     font-family: 'Poppins', sans-serif;
@@ -130,4 +130,10 @@ swiper-slide {
     font-weight: 400;
     color: #aaa;
   }
+}
+
+// African band footer
+.pattern-footer {
+  width: 100%;
+  img { width: 100%; height: auto; display: block; }
 }
