@@ -100,7 +100,9 @@
       "WebFetch(domain:www.my-dohone.com)",
       "WebFetch(domain:github.com)",
       "Bash(\"$ADB\" devices:*)",
-      "Bash(ls -d */)"
+      "Bash(ls -d */)",
+      "Bash(ls C:/Users/Admin/Downloads/Fundi/MobileApp/frontend/android/app/src/main/res/mipmap-*)",
+      "Bash(npm list:*)"
     ]
   }
 }

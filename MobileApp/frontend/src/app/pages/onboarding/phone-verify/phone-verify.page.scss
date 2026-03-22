@@ -120,6 +120,11 @@
 
     .modal-btn {
       --border-radius: 6px;
+      --box-shadow: none;
+      --padding-start: 20px;
+      --padding-end: 20px;
+      --padding-top: 10px;
+      --padding-bottom: 10px;
       font-family: 'Open Sans', sans-serif; font-size: 13px; font-weight: 600;
     }
 

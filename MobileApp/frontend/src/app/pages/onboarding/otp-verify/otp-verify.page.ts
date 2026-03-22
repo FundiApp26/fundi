@@ -87,8 +87,10 @@ export class OtpVerifyPage implements OnInit, OnDestroy {
           this.router.navigate(['/pin-login'], { replaceUrl: true });
         }
       },
-      error: () => {
+      error: (err) => {
         this.loading = false;
+        console.error('OTP verify failed:', err?.error);
+        alert(err?.error?.error || 'Code invalide ou expiré');
         this.otpValue = '';
       }
     });

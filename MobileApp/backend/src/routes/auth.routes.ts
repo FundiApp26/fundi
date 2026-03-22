@@ -59,19 +59,22 @@ router.post("/verify-otp", async (req: Request, res: Response, next: NextFunctio
     // Dev bypass: code 000000 always works in development
     const isDevBypass = env.NODE_ENV === "development" && code === "000000";
 
-    if (!isDevBypass) {
-      const otp = await prisma.otpCode.findFirst({
-        where: { phone, code, verified: false, expiresAt: { gte: new Date() } },
-        orderBy: { createdAt: "desc" },
-      });
-
-      if (!otp) return res.status(400).json({ error: "Code invalide ou expiré" });
-
-      // Mark as verified
-      await prisma.otpCode.update({ where: { id: otp.id }, data: { verified: true } });
+    if (isDevBypass) {
+      // Skip DB entirely — just return success
+      let existingUser = null;
+      try { existingUser = await prisma.user.findUnique({ where: { phone } }); } catch {}
+      return res.status(200).json({ verified: true, isNewUser: !existingUser, phone });
     }
 
-    // Check if user already exists (returning user)
+    const otp = await prisma.otpCode.findFirst({
+      where: { phone, code, verified: false, expiresAt: { gte: new Date() } },
+      orderBy: { createdAt: "desc" },
+    });
+
+    if (!otp) return res.status(400).json({ error: "Code invalide ou expiré" });
+
+    await prisma.otpCode.update({ where: { id: otp.id }, data: { verified: true } });
+
     const existingUser = await prisma.user.findUnique({ where: { phone } });
 
     res.status(200).json({
@@ -98,14 +101,15 @@ router.post("/register", async (req: Request, res: Response, next: NextFunction)
       return res.status(400).json({ error: "Le PIN doit contenir 5 chiffres" });
     }
 
-    // Check phone was verified
-    const verifiedOtp = await prisma.otpCode.findFirst({
-      where: { phone, verified: true },
-      orderBy: { createdAt: "desc" },
-    });
-
-    if (!verifiedOtp) {
-      return res.status(400).json({ error: "Numéro non vérifié" });
+    // Check phone was verified (skip in dev mode)
+    if (env.NODE_ENV !== "development") {
+      const verifiedOtp = await prisma.otpCode.findFirst({
+        where: { phone, verified: true },
+        orderBy: { createdAt: "desc" },
+      });
+      if (!verifiedOtp) {
+        return res.status(400).json({ error: "Numéro non vérifié" });
+      }
     }
 
     // Check user doesn't already exist
