@@ -30,6 +30,7 @@
       </div>
     </div>
 
+    <div class="otp-line"></div>
     <p class="hint-text">Enter 6-digit code</p>
 
     <!-- Hidden native input that triggers keyboard -->
@@ -47,12 +48,12 @@
     <!-- Resend / Call -->
     <div class="resend-section">
       <div class="resend-row" (click)="resendSms(); $event.stopPropagation()">
-        <ion-icon name="chatbox-outline" class="resend-icon"></ion-icon>
+        <ion-icon name="chatbox" class="resend-icon"></ion-icon>
         <span class="resend-label">Resend SMS</span>
         <span class="timer">{{ formatTimer(resendTimer) }}</span>
       </div>
       <div class="resend-row">
-        <ion-icon name="call-outline" class="resend-icon"></ion-icon>
+        <ion-icon name="call" class="resend-icon"></ion-icon>
         <span class="resend-label">Call me</span>
         <span class="timer">{{ formatTimer(callTimer) }}</span>
       </div>

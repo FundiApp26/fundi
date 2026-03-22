@@ -4,6 +4,7 @@
   display: flex; flex-direction: column;
   height: 100%; padding: 0 24px;
   padding-top: calc(16px + var(--ion-safe-area-top, 0px));
+  padding-bottom: calc(15vh + var(--ion-safe-area-bottom, 0px));
 }
 
 .back-arrow {
@@ -115,21 +116,21 @@
   }
 
   .modal-actions {
-    display: flex; gap: 12px;
+    display: flex; justify-content: flex-end; gap: 10px;
 
     .modal-btn {
-      flex: 1; --border-radius: 8px;
-      font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 400;
-      height: 44px;
+      --border-radius: 6px;
+      font-family: 'Open Sans', sans-serif; font-size: 13px; font-weight: 600;
     }
 
     .yes-btn {
-      --background: #53893D; --box-shadow: 0px 4px 23px #A8D496;
+      --background: #53893D;
       --color: #fff;
     }
 
     .edit-btn {
-      --color: #888;
+      --background: #F2F2F2;
+      --color: #535353;
     }
   }
 }

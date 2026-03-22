@@ -3,7 +3,7 @@
 .dev-banner {
   background: #FFF3E0; border: 1px solid #FFB74D; border-radius: 8px;
   padding: 8px 14px; margin-bottom: 12px; text-align: center;
-  font-family: 'Poppins', sans-serif; font-size: 13px; color: #E65100;
+  font-family: 'Open Sans', sans-serif; font-size: 13px; color: #E65100;
   strong { font-weight: 700; font-size: 18px; letter-spacing: 4px; }
 }
 
@@ -28,33 +28,39 @@ h1 {
   gap: 4px; margin-bottom: 32px;
 
   .phone-display {
-    font-family: 'Poppins', sans-serif; font-size: 15px; color: var(--fundi-dark);
+    font-family: 'Open Sans', sans-serif; font-size: 15px; color: #535353;
   }
-  .dot-separator { font-size: 15px; color: var(--fundi-dark); margin: 0 2px; }
+  .dot-separator { font-size: 15px; color: #535353; margin: 0 2px; }
   .wrong-number {
-    font-family: 'Poppins', sans-serif; font-size: 15px;
-    color: var(--fundi-green); text-decoration: none; cursor: pointer;
+    font-family: 'Open Sans', sans-serif; font-size: 15px;
+    color: #53893D; text-decoration: none; cursor: pointer;
   }
 }
 
 // OTP dashes
 .otp-dashes {
-  display: flex; justify-content: center; gap: 10px; margin-bottom: 8px;
+  display: flex; justify-content: center; gap: 10px; margin-bottom: 0;
 }
 
 .otp-slot {
   width: 40px; text-align: center;
 
   .digit {
-    font-family: 'Poppins', sans-serif; font-size: 28px;
-    font-weight: 600; color: var(--fundi-dark);
+    font-family: 'Open Sans', sans-serif; font-size: 28px;
+    font-weight: 600; color: #535353;
   }
   .dash { font-size: 28px; color: #ccc; font-weight: 300; }
   &.filled .dash { display: none; }
 }
 
+// Line between dashes and hint
+.otp-line {
+  height: 1px; background: #B8B8B8;
+  margin: 8px 40px 8px;
+}
+
 .hint-text {
-  font-family: 'Poppins', sans-serif; font-size: 13px;
+  font-family: 'Open Sans', sans-serif; font-size: 13px;
   color: #aaa; text-align: center; margin: 0 0 32px;
 }
 
@@ -71,9 +77,9 @@ h1 {
   display: flex; align-items: center; gap: 12px;
   padding: 12px 0; cursor: pointer;
 
-  .resend-icon { font-size: 20px; color: #aaa; }
+  .resend-icon { font-size: 20px; color: #949494; }
   .resend-label {
-    font-family: 'Poppins', sans-serif; font-size: 14px; color: #888; flex: 1;
+    font-family: 'Open Sans', sans-serif; font-size: 14px; color: #949494; flex: 1;
   }
-  .timer { font-family: 'Poppins', sans-serif; font-size: 14px; color: #aaa; }
+  .timer { font-family: 'Open Sans', sans-serif; font-size: 14px; color: #949494; }
 }

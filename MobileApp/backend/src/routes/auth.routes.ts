@@ -56,15 +56,20 @@ router.post("/verify-otp", async (req: Request, res: Response, next: NextFunctio
     const { phone, code } = req.body;
     if (!phone || !code) return res.status(400).json({ error: "Téléphone et code requis" });
 
-    const otp = await prisma.otpCode.findFirst({
-      where: { phone, code, verified: false, expiresAt: { gte: new Date() } },
-      orderBy: { createdAt: "desc" },
-    });
+    // Dev bypass: code 000000 always works in development
+    const isDevBypass = env.NODE_ENV === "development" && code === "000000";
 
-    if (!otp) return res.status(400).json({ error: "Code invalide ou expiré" });
+    if (!isDevBypass) {
+      const otp = await prisma.otpCode.findFirst({
+        where: { phone, code, verified: false, expiresAt: { gte: new Date() } },
+        orderBy: { createdAt: "desc" },
+      });
 
-    // Mark as verified
-    await prisma.otpCode.update({ where: { id: otp.id }, data: { verified: true } });
+      if (!otp) return res.status(400).json({ error: "Code invalide ou expiré" });
+
+      // Mark as verified
+      await prisma.otpCode.update({ where: { id: otp.id }, data: { verified: true } });
+    }
 
     // Check if user already exists (returning user)
     const existingUser = await prisma.user.findUnique({ where: { phone } });
@@ -239,14 +244,17 @@ router.post("/reset-password", async (req: Request, res: Response, next: NextFun
 
     if (newPin.length !== 5) return res.status(400).json({ error: "Le PIN doit contenir 5 chiffres" });
 
-    const otp = await prisma.otpCode.findFirst({
-      where: { phone, code, verified: false, expiresAt: { gte: new Date() } },
-      orderBy: { createdAt: "desc" },
-    });
+    // Dev bypass: code 0000 always works
+    const isDevBypass = env.NODE_ENV === "development" && code === "0000";
 
-    if (!otp) return res.status(400).json({ error: "Code invalide ou expiré" });
-
-    await prisma.otpCode.update({ where: { id: otp.id }, data: { verified: true } });
+    if (!isDevBypass) {
+      const otp = await prisma.otpCode.findFirst({
+        where: { phone, code, verified: false, expiresAt: { gte: new Date() } },
+        orderBy: { createdAt: "desc" },
+      });
+      if (!otp) return res.status(400).json({ error: "Code invalide ou expiré" });
+      await prisma.otpCode.update({ where: { id: otp.id }, data: { verified: true } });
+    }
 
     const pinHash = await bcrypt.hash(newPin, 10);
     await prisma.user.update({ where: { phone }, data: { pinHash } });
