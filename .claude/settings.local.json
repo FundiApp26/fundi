@@ -102,7 +102,11 @@
       "Bash(\"$ADB\" devices:*)",
       "Bash(ls -d */)",
       "Bash(ls C:/Users/Admin/Downloads/Fundi/MobileApp/frontend/android/app/src/main/res/mipmap-*)",
-      "Bash(npm list:*)"
+      "Bash(npm list:*)",
+      "Bash(ipconfig)",
+      "Bash(ip addr:*)",
+      "Bash(find . -name \"*.html\" -exec sed -i 's/Common Safe/Fundi/g' {} +)",
+      "Bash(find . -name \"*.ts\" -not -name \"*.spec.*\" -exec sed -i 's/Common Safe/Fundi/g' {} +)"
     ]
   }
 }

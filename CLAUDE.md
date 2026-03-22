@@ -52,7 +52,11 @@ Colors defined in `tailwind.config.js`:
 - `fundi-gray`: #F5F5F5 (background)
 - `fundi-dark`: #1A1A1A (text)
 
-Font: Poppins (loaded via Google Fonts)
+Font: Poppins + Open Sans (loaded via Google Fonts)
+
+## App Naming
+
+The app name is **Fundi** (not "Common Safe"). Use "Fundi" everywhere in the UI.
 
 ## Internationalization (i18n)
 

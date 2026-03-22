@@ -43,10 +43,11 @@ export class TabsPage implements OnInit {
         }));
       },
       error: () => {
-        // Fallback mock data if API fails
         this.cotisations = [
           { id: '1', name: 'Cotisation 50.000', avatar: '', lastMessage: 'Benoit Marie: Le dépôt a été effectué', time: '18:30', unread: 3 },
-          { id: '2', name: 'Cotisation 20.000', avatar: '', lastMessage: 'Steph Happi: OK je cotise ce soir', time: '15:45', unread: 0 },
+          { id: '2', name: 'Cotisation 20.000', avatar: '', lastMessage: 'Simply dummy text of the printing and ty...', time: '10:15', unread: 0 },
+          { id: '3', name: 'Cotisation 10.000', avatar: '', lastMessage: 'Hey !', time: '07:32', unread: 1 },
+          { id: '4', name: 'Cotisation 5.000', avatar: '', lastMessage: 'Lorem Ipsum is simply dummy text', time: 'Apr 25 2021', unread: 0 },
         ];
       }
     });
@@ -66,7 +67,14 @@ export class TabsPage implements OnInit {
         }));
       },
       error: () => {
-        this.discussions = [];
+        this.discussions = [
+          { id: '1', name: 'Steph Happi', avatar: '', lastMessage: 'Salut toi ! Comment tu vas ?', time: '15:45', unread: 3, online: true },
+          { id: '2', name: 'Blonde De Londre', avatar: '', lastMessage: 'Simply dummy text of the printing and ty...', time: '10:15', unread: 0, online: false },
+          { id: '3', name: 'Yannick Fabregas Sadjap', avatar: '', lastMessage: 'Hey !', time: '07:32', unread: 1, online: false },
+          { id: '4', name: 'Khadij M.', avatar: '', lastMessage: 'Lorem Ipsum is simply dummy text', time: 'Apr 25 2021', unread: 0, online: false },
+          { id: '5', name: 'Sacha Mansem', avatar: '', lastMessage: 'The printing and typesetting industr...', time: 'Mar 12 2021', unread: 0, online: false },
+          { id: '6', name: 'Brenda Maboma', avatar: '', lastMessage: 'Simply dummy text of the printing and s...', time: '10:15', unread: 0, online: false },
+        ];
       }
     });
   }

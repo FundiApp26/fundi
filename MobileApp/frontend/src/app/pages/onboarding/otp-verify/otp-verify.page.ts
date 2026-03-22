@@ -32,6 +32,8 @@ export class OtpVerifyPage implements OnInit, OnDestroy {
     this.devCode = this.route.snapshot.queryParams['devCode'] || '';
     this.phone = this.formatPhoneDisplay(this.rawPhone);
     this.startTimer();
+    // Auto-focus input on page load
+    this.focusInput();
   }
 
   ngOnDestroy() { clearInterval(this.timerInterval); }
@@ -72,24 +74,28 @@ export class OtpVerifyPage implements OnInit, OnDestroy {
 
   verifyOtp() {
     if (this.otpValue.length !== 6) return;
-    this.loading = true;
 
+    // DEV: accept 000000 locally without server call
+    // TODO: remove this when SMS provider is configured
+    if (this.otpValue === '000000') {
+      this.storage.set('fundi_setup_phone', this.rawPhone);
+      this.router.navigate(['/profile-setup'], { replaceUrl: true });
+      return;
+    }
+
+    this.loading = true;
     this.auth.verifyOtp(this.rawPhone, this.otpValue).subscribe({
       next: (res) => {
         this.loading = false;
-        // Store phone for registration flow
         this.storage.set('fundi_setup_phone', this.rawPhone);
-
         if (res.isNewUser) {
           this.router.navigate(['/profile-setup'], { replaceUrl: true });
         } else {
-          // Existing user → go to PIN login
           this.router.navigate(['/pin-login'], { replaceUrl: true });
         }
       },
       error: (err) => {
         this.loading = false;
-        console.error('OTP verify failed:', err?.error);
         alert(err?.error?.error || 'Code invalide ou expiré');
         this.otpValue = '';
       }

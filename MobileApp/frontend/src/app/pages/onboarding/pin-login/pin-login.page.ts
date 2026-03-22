@@ -46,7 +46,16 @@ export class PinLoginPage implements OnInit {
     else if (this.pinValue.length < 5) { this.pinValue += key; this.error = ''; }
   }
 
-  onConfirm() {
+  async onConfirm() {
+    // DEV: verify PIN locally from cache
+    // TODO: replace with this.auth.login() when backend is connected
+    const savedPin = await this.storage.get('fundi_pin');
+    if (savedPin && this.pinValue === savedPin) {
+      this.router.navigate(['/tabs'], { replaceUrl: true });
+      return;
+    }
+
+    // Fallback: try server
     if (!this.userPhone) { this.error = 'Numéro non trouvé'; return; }
     this.loading = true;
 
