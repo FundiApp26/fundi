@@ -4,30 +4,14 @@
     <swiper-slide *ngFor="let slide of slides; let i = index">
       <div class="slide-page">
 
-        <!-- Green illustration area with curved bottom -->
+        <!-- Top area: circle pattern with illustration -->
         <div class="illustration-area">
-          <div class="pattern-overlay"></div>
-          <div class="illustration-wrapper">
-            <div class="illust-icon" [ngSwitch]="i">
-              <ng-container *ngSwitchCase="0">
-                <ion-icon name="cash-outline" class="icon-main orange"></ion-icon>
-                <ion-icon name="hand-left-outline" class="icon-secondary green"></ion-icon>
-              </ng-container>
-              <ng-container *ngSwitchCase="1">
-                <ion-icon name="people-outline" class="icon-main green"></ion-icon>
-                <ion-icon name="checkmark-done-outline" class="icon-secondary orange"></ion-icon>
-              </ng-container>
-              <ng-container *ngSwitchCase="2">
-                <ion-icon name="clipboard-outline" class="icon-main green"></ion-icon>
-                <ion-icon name="checkmark-outline" class="icon-secondary orange"></ion-icon>
-              </ng-container>
-              <ng-container *ngSwitchCase="3">
-                <ion-icon name="time-outline" class="icon-main orange"></ion-icon>
-                <ion-icon name="refresh-outline" class="icon-secondary green"></ion-icon>
-              </ng-container>
-            </div>
+          <div class="circle-bg">
+            <img src="assets/patterns/circle-pattern.png" alt="" />
           </div>
-          <div class="curved-bottom"></div>
+          <div class="illustration">
+            <img [src]="slide.icon" alt="" />
+          </div>
         </div>
 
         <!-- Text -->
@@ -45,11 +29,6 @@
         <div class="skip-btn" (click)="skip()">
           <span>Skyp</span>
           <span class="chevrons">&nbsp;>></span>
-        </div>
-
-        <!-- African band footer -->
-        <div class="pattern-footer">
-          <img src="assets/patterns/bande-africaine-footer.png" alt="" />
         </div>
 
       </div>
