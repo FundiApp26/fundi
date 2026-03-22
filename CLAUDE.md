@@ -46,6 +46,8 @@ Colors defined in `tailwind.config.js`:
 - `fundi-pagination-active`: #FDA810 (tiret actif sur les slides onboarding)
 - `fundi-pagination-inactive`: #E6E6E6 (tirets inactifs sur les slides onboarding)
 - `fundi-button-shadow`: #A8D496 (ombre portée bouton Welcome — X:0 Y:4 Flou:23)
+- `fundi-text-onboarding`: #535353 (texte descriptif slides onboarding, Open Sans Semibold)
+- `fundi-skip-text`: #BEBEBE (texte "Skyp" sur les slides onboarding)
 - `fundi-orange-light`: #F5A623
 - `fundi-gray`: #F5F5F5 (background)
 - `fundi-dark`: #1A1A1A (text)

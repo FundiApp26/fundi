@@ -49,7 +49,7 @@ swiper-slide {
 .illustration {
   position: relative;
   z-index: 2;
-  margin-top: 10%;
+  margin-top: 55%;
 
   img {
     width: min(40vw, 160px);
@@ -67,10 +67,10 @@ swiper-slide {
   padding: 24px 32px 0;
 
   p {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', 'Poppins', sans-serif;
     font-size: clamp(16px, 4.5vw, 22px);
     font-weight: 600;
-    color: var(--fundi-dark);
+    color: #535353;
     line-height: 1.4;
     margin: 0;
     text-align: center;
@@ -94,7 +94,7 @@ swiper-slide {
 
   &.active {
     background: #FDA810;
-    width: min(114px, 28vw);
+    width: min(36px, 9vw);
   }
 }
 
@@ -103,14 +103,20 @@ swiper-slide {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 6px;
   cursor: pointer;
   padding-bottom: calc(16px + var(--ion-safe-area-bottom, 0px));
 
   span {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', 'Poppins', sans-serif;
     font-size: 14px;
     font-weight: 400;
-    color: #aaa;
+    color: #BEBEBE;
+  }
+
+  .skip-icon {
+    width: 12px;
+    height: auto;
+    opacity: 0.6;
   }
 }
