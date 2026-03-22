@@ -17,9 +17,7 @@ export class PhoneVerifyPage {
   constructor(private router: Router, private location: Location, private auth: AuthService) {}
 
   goBack() { this.location.back(); }
-
   onPhoneInput() { this.phoneNumber = this.phoneNumber.replace(/\D/g, ''); }
-
   openCountryPicker() {}
 
   formatPhone(num: string): string {
@@ -37,14 +35,14 @@ export class PhoneVerifyPage {
     const phone = '+237' + this.phoneNumber;
 
     this.auth.sendOtp(phone).subscribe({
-      next: () => {
+      next: (res) => {
         this.loading = false;
-        this.router.navigate(['/otp-verify'], { queryParams: { phone } });
+        this.router.navigate(['/otp-verify'], {
+          queryParams: { phone, ...(res.devCode ? { devCode: res.devCode } : {}) }
+        });
       },
-      error: (err) => {
+      error: () => {
         this.loading = false;
-        console.error('OTP send failed', err);
-        // Navigate anyway for dev (SMS might not be configured)
         this.router.navigate(['/otp-verify'], { queryParams: { phone } });
       }
     });

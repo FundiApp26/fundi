@@ -18,6 +18,7 @@ export interface AuthUser {
 export interface OtpResponse {
   message: string;
   expiresIn: number;
+  devCode?: string; // Only in dev mode
 }
 
 export interface VerifyOtpResponse {

@@ -19,6 +19,7 @@ export class OtpVerifyPage implements OnInit, OnDestroy {
   resendTimer = 57;
   callTimer = 58;
   loading = false;
+  devCode = ''; // Displayed in dev mode for testing
   private timerInterval: any;
 
   constructor(
@@ -28,6 +29,7 @@ export class OtpVerifyPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.rawPhone = this.route.snapshot.queryParams['phone'] || '+237000000000';
+    this.devCode = this.route.snapshot.queryParams['devCode'] || '';
     this.phone = this.formatPhoneDisplay(this.rawPhone);
     this.startTimer();
   }

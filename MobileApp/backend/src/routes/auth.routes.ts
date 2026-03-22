@@ -41,7 +41,9 @@ router.post("/send-otp", async (req: Request, res: Response, next: NextFunction)
     // Send SMS (non-blocking, don't fail if SMS service is down)
     sendOtpSms(phone, code).catch((err) => console.error("[SMS] Failed:", err));
 
-    res.status(200).json({ message: "Code envoyé", expiresIn: 300 });
+    // In dev mode, include code in response for testing
+    const isDev = env.NODE_ENV === "development";
+    res.status(200).json({ message: "Code envoyé", expiresIn: 300, ...(isDev && { devCode: code }) });
   } catch (err) {
     next(err);
   }
@@ -221,7 +223,8 @@ router.post("/forgot-password", async (req: Request, res: Response, next: NextFu
     await prisma.otpCode.create({ data: { phone, code, expiresAt } });
     sendOtpSms(phone, code).catch((err) => console.error("[SMS] Failed:", err));
 
-    res.status(200).json({ message: "Code envoyé" });
+    const isDev = env.NODE_ENV === "development";
+    res.status(200).json({ message: "Code envoyé", ...(isDev && { devCode: code }) });
   } catch (err) {
     next(err);
   }

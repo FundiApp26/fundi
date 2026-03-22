@@ -1,5 +1,12 @@
 .otp-content { --background: #ffffff; }
 
+.dev-banner {
+  background: #FFF3E0; border: 1px solid #FFB74D; border-radius: 8px;
+  padding: 8px 14px; margin-bottom: 12px; text-align: center;
+  font-family: 'Poppins', sans-serif; font-size: 13px; color: #E65100;
+  strong { font-weight: 700; font-size: 18px; letter-spacing: 4px; }
+}
+
 .page-container {
   padding: 0 24px;
   padding-top: calc(16px + var(--ion-safe-area-top, 0px));

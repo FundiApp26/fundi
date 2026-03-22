@@ -17,6 +17,7 @@ export class ForgotPasswordPage {
   confirmPassword = '';
   error = '';
   loading = false;
+  devCode = '';
   activePassField: 'new' | 'confirm' = 'new';
 
   keypad = [
@@ -62,7 +63,7 @@ export class ForgotPasswordPage {
     const phone = '+237' + this.phoneNumber;
 
     this.auth.forgotPassword(phone).subscribe({
-      next: () => { this.loading = false; this.phase = 'verify'; },
+      next: (res: any) => { this.loading = false; this.devCode = res.devCode || ''; this.phase = 'verify'; },
       error: (err) => { this.loading = false; this.error = err.error?.error || 'Erreur'; }
     });
   }

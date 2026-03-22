@@ -5,6 +5,11 @@
       <ion-icon name="arrow-back-outline"></ion-icon>
     </div>
 
+    <!-- Dev mode: show OTP code -->
+    <div class="dev-banner" *ngIf="devCode">
+      <span>DEV Code : <strong>{{ devCode }}</strong></span>
+    </div>
+
     <!-- Title -->
     <h1>Entrez votre code de vérification</h1>
 
