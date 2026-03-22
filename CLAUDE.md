@@ -41,7 +41,11 @@ Fundi/
 Colors defined in `tailwind.config.js`:
 - `fundi-green`: #2D5A27 (primary brand color)
 - `fundi-green-light`: #4A7C42
+- `fundi-green-button`: #53893D (couleur des boutons verts dans l'app mobile)
 - `fundi-orange`: #E87A1E (accent color)
+- `fundi-pagination-active`: #FDA810 (tiret actif sur les slides onboarding)
+- `fundi-pagination-inactive`: #E6E6E6 (tirets inactifs sur les slides onboarding)
+- `fundi-button-shadow`: #A8D496 (ombre portée bouton Welcome — X:0 Y:4 Flou:23)
 - `fundi-orange-light`: #F5A623
 - `fundi-gray`: #F5F5F5 (background)
 - `fundi-dark`: #1A1A1A (text)
