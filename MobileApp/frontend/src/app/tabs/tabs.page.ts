@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActionSheetController } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 
 interface ConversationItem {
@@ -23,7 +24,10 @@ export class TabsPage implements OnInit {
   cotisations: ConversationItem[] = [];
   discussions: ConversationItem[] = [];
 
-  constructor(private router: Router, private api: ApiService) {}
+  showSearch = false;
+  searchQuery = '';
+
+  constructor(private router: Router, private api: ApiService, private actionSheet: ActionSheetController) {}
 
   ngOnInit() {
     this.loadCotisations();
@@ -80,7 +84,10 @@ export class TabsPage implements OnInit {
   }
 
   get currentList(): ConversationItem[] {
-    return this.activeTab === 'cotisation' ? this.cotisations : this.discussions;
+    const list = this.activeTab === 'cotisation' ? this.cotisations : this.discussions;
+    if (!this.searchQuery) return list;
+    const q = this.searchQuery.toLowerCase();
+    return list.filter(c => c.name.toLowerCase().includes(q) || c.lastMessage.toLowerCase().includes(q));
   }
 
   get totalUnread() {
@@ -106,6 +113,23 @@ export class TabsPage implements OnInit {
     }
   }
 
-  openSearch() {}
-  openMenu() { this.router.navigate(['/profile/my-profile']); }
+  openSearch() { this.showSearch = !this.showSearch; this.searchQuery = ''; }
+  onSearch() {}
+
+  async openMenu() {
+    const sheet = await this.actionSheet.create({
+      buttons: [
+        { text: 'Mon profil', icon: 'person-outline', handler: () => { this.router.navigate(['/profile/my-profile']); } },
+        { text: 'Nouvelle cotisation', icon: 'add-circle-outline', handler: () => { this.router.navigate(['/cotisation/create']); } },
+        { text: 'Nouvelle discussion', icon: 'chatbubble-outline', handler: () => { this.router.navigate(['/discussion/new']); } },
+        { text: 'Inviter des proches', icon: 'share-social-outline' },
+        { text: 'Premium', icon: 'diamond-outline', handler: () => { this.router.navigate(['/premium']); } },
+        { text: 'Notifications', icon: 'notifications-outline', handler: () => { this.router.navigate(['/notifications']); } },
+        { text: 'Historique', icon: 'time-outline', handler: () => { this.router.navigate(['/history-transactions']); } },
+        { text: 'À propos', icon: 'information-circle-outline', handler: () => { this.router.navigate(['/about']); } },
+        { text: 'Annuler', role: 'cancel', icon: 'close-outline' },
+      ],
+    });
+    await sheet.present();
+  }
 }

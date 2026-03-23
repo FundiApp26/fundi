@@ -8,6 +8,13 @@
     </div>
   </div>
 
+  <!-- Search bar (togglable) -->
+  <div class="search-bar" *ngIf="showSearch">
+    <ion-icon name="search-outline"></ion-icon>
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Rechercher..." (input)="onSearch()" autofocus />
+    <ion-icon name="close-outline" (click)="showSearch = false; searchQuery = ''; onSearch()"></ion-icon>
+  </div>
+
   <!-- Toggle segment: pill buttons -->
   <div class="segment-container">
     <div class="segment-toggle">
@@ -37,11 +44,11 @@
             {{ item.name }}
             <span class="online-dot" *ngIf="item.online">●</span>
           </span>
-          <span class="conv-time">{{ item.time }}</span>
+          <span class="unread-badge" *ngIf="item.unread > 0">{{ item.unread }}</span>
         </div>
         <div class="conv-bottom">
           <span class="conv-message">{{ item.lastMessage }}</span>
-          <span class="unread-badge" *ngIf="item.unread > 0">{{ item.unread }}</span>
+          <span class="conv-time">{{ item.time }}</span>
         </div>
       </div>
     </div>
