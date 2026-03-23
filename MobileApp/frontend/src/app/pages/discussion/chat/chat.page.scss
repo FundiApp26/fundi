@@ -15,7 +15,11 @@
     ion-icon { font-size: 18px; }
   }
   .contact-name { flex: 1; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; color: var(--fundi-dark); }
-  .header-right { display: flex; gap: 16px; ion-icon { font-size: 22px; color: var(--fundi-dark); cursor: pointer; } }
+  .header-right {
+    display: flex; gap: 16px; align-items: center;
+    ion-icon { font-size: 22px; color: var(--fundi-dark); cursor: pointer; }
+    .send-money-icon { width: 24px; height: 24px; object-fit: contain; cursor: pointer; }
+  }
 }
 
 // Messages
@@ -56,16 +60,21 @@
 .input-bar {
   display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-top: 1px solid #f0f0f0;
 }
-.input-icons { display: flex; gap: 10px; ion-icon { font-size: 22px; color: #888; cursor: pointer; } }
+.input-icons {
+  display: flex; gap: 10px;
+  ion-icon { font-size: 22px; color: #888; cursor: pointer; }
+  ion-icon:first-child { color: #53893D; }
+}
 .input-bar input {
   flex: 1; border: none; outline: none; font-family: 'Poppins', sans-serif; font-size: 14px;
   color: var(--fundi-dark); background: transparent; padding: 8px 0;
   &::placeholder { color: #bbb; }
 }
 .send-btn {
-  width: 36px; height: 36px; border-radius: 8px; background: #53893D;
+  width: 40px; height: 40px; border-radius: 8px; background: #53893D;
   display: flex; align-items: center; justify-content: center; cursor: pointer;
-  ion-icon { font-size: 18px; color: #fff; transform: rotate(-30deg); }
+  padding: 8px; flex-shrink: 0;
+  ion-icon { font-size: 20px; color: #fff; transform: rotate(-30deg); }
 }
 .pattern-footer { img { width: 100%; height: auto; display: block; } }
 
@@ -75,48 +84,89 @@
   display: flex; align-items: center; justify-content: center;
 }
 .modal-backdrop { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); }
-.modal-card {
-  position: relative; z-index: 1; background: #fff; border-radius: 12px;
-  padding: 24px; margin: 16px; width: calc(100% - 32px); max-width: 380px;
+
+// Send Money Modal
+.send-money-modal {
+  position: relative; z-index: 1; background: #fff; border-radius: 16px;
+  margin: 16px; width: calc(100% - 32px); max-width: 380px; overflow: hidden;
 }
 
-// Send Money
-.send-money-card {
-  h2 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: var(--fundi-dark); margin: 0 0 20px; text-align: center; }
+.modal-band-top, .modal-band-bottom {
+  img { width: 100%; height: auto; display: block; }
+}
+
+.modal-body {
+  padding: 20px 24px;
+
+  h2 {
+    font-family: 'Open Sans', sans-serif; font-size: 16px; font-weight: 400;
+    color: #535353; margin: 0 0 20px; text-align: center; line-height: 1.4;
+    strong { font-weight: 700; }
+  }
+
   .field-group {
     margin-bottom: 16px;
-    label { font-family: 'Poppins', sans-serif; font-size: 12px; color: #aaa; margin-bottom: 6px; display: block; }
+    label { font-family: 'Open Sans', sans-serif; font-size: 13px; color: #535353; font-weight: 600; margin-bottom: 6px; display: block; }
   }
-  .amount-input {
-    display: flex; align-items: center; border: 1px solid #e0e0e0; border-radius: 8px; padding: 0 14px;
-    input { flex: 1; border: none; outline: none; font-family: 'Poppins', sans-serif; font-size: 15px; color: var(--fundi-dark); background: transparent; padding: 12px 0; &::placeholder { color: #ccc; } }
-    .currency { font-family: 'Poppins', sans-serif; font-size: 14px; color: #888; border-left: 1px solid #e0e0e0; padding-left: 12px; margin-left: 8px; }
+
+  .amount-row {
+    display: flex; align-items: center; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;
+    input {
+      flex: 1; border: none; outline: none; font-family: 'Open Sans', sans-serif; font-size: 14px;
+      color: #535353; background: transparent; padding: 12px 14px;
+      &::placeholder { color: #ccc; }
+    }
+    .currency-tag {
+      font-family: 'Open Sans', sans-serif; font-size: 13px; font-weight: 600; color: #535353;
+      padding: 12px 14px; border-left: 1px solid #e0e0e0; background: #fafafa;
+    }
   }
-  .operator-section { margin-bottom: 16px; }
-  .operator-label {
-    font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500; color: var(--fundi-dark); margin: 0 0 12px;
-    display: flex; align-items: center; gap: 6px;
-    .dollar-icon { color: var(--fundi-green); font-size: 18px; }
+
+  .operator-section { margin-bottom: 20px; }
+
+  .operator-title {
+    font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 500; color: #535353;
+    margin: 0 0 12px; display: flex; align-items: center; gap: 6px;
+    .dollar-ico { color: #53893D; font-size: 18px; }
   }
-  .operator-cards { display: flex; gap: 12px; margin-bottom: 8px; }
-  .operator-card {
-    flex: 1; border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px;
-    display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative;
-    img { width: 80px; height: 40px; object-fit: contain; }
-    &.selected { border-color: var(--fundi-green); }
-    .check-badge {
+
+  .operator-images {
+    display: flex; gap: 16px; margin-bottom: 8px;
+  }
+
+  .op-img {
+    position: relative; cursor: pointer; border-radius: 8px; overflow: visible;
+    img { width: 80px; height: 56px; object-fit: contain; border-radius: 8px; }
+
+    .op-check {
       position: absolute; top: -6px; left: -6px; width: 20px; height: 20px;
-      background: var(--fundi-green); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      background: #53893D; border-radius: 50%; display: flex; align-items: center; justify-content: center;
       ion-icon { font-size: 12px; color: #fff; }
     }
   }
-  .confirmation-name {
-    font-family: 'Poppins', sans-serif; font-size: 13px; color: var(--fundi-green); margin: 8px 0 0;
+
+  .conf-name {
+    font-family: 'Open Sans', sans-serif; font-size: 13px; color: #53893D; margin: 8px 0 0;
     strong { font-weight: 600; }
   }
-  .confirm-btn { --border-radius: 8px; --background: #53893D; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-  .cancel-btn { --border-radius: 8px; --border-color: #e0e0e0; --color: #888; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
-  .instruction-text { font-family: 'Poppins', sans-serif; font-size: 12px; color: #aaa; font-style: italic; text-align: center; margin: 0; }
+
+  .btn-confirm {
+    width: 100%; padding: 14px; border: none; border-radius: 8px;
+    background: #53893D; color: #fff; font-family: 'Open Sans', sans-serif;
+    font-size: 14px; font-weight: 600; cursor: pointer; margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-cancel {
+    width: 100%; padding: 14px; border: 1px solid #e0e0e0; border-radius: 8px;
+    background: #fff; color: #535353; font-family: 'Open Sans', sans-serif;
+    font-size: 14px; font-weight: 500; cursor: pointer; margin-bottom: 12px;
+  }
+
+  .instruction {
+    font-family: 'Open Sans', sans-serif; font-size: 12px; color: #aaa;
+    font-style: italic; text-align: center; margin: 0;
+  }
 }
 
 // Success

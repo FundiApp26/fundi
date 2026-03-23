@@ -8,7 +8,7 @@
     </div>
     <span class="contact-name">{{ contactName }}</span>
     <div class="header-right">
-      <ion-icon name="cash-outline" (click)="openSendMoney()"></ion-icon>
+      <img src="assets/icons/send-money.png" alt="" class="send-money-icon" (click)="openSendMoney()" />
       <ion-icon name="ellipsis-vertical"></ion-icon>
     </div>
   </div>
@@ -34,35 +34,43 @@
   <!-- Send Money Modal -->
   <div class="modal-overlay" *ngIf="showSendMoney">
     <div class="modal-backdrop" (click)="showSendMoney = false"></div>
-    <div class="modal-card send-money-card">
-      <h2>Envoyer de l'argent à<br/>{{ contactName }}</h2>
+    <div class="send-money-modal">
+      <!-- Bande africaine top -->
+      <div class="modal-band-top"><img src="assets/patterns/bande-africaine-footer.png" alt="" /></div>
 
-      <div class="field-group">
-        <label>Montant *</label>
-        <div class="amount-input">
-          <input type="tel" [(ngModel)]="sendAmount" placeholder="Entrer le montant" />
-          <span class="currency">FCFA</span>
-        </div>
-      </div>
+      <div class="modal-body">
+        <h2>Envoyer de l'argent à<br/><strong>{{ contactName }}</strong></h2>
 
-      <div class="operator-section">
-        <p class="operator-label"><ion-icon name="logo-usd" class="dollar-icon"></ion-icon> Choisit le moyen de payement</p>
-        <div class="operator-cards">
-          <div class="operator-card" [class.selected]="selectedOperator === 'om'" (click)="selectedOperator = 'om'">
-            <div class="check-badge" *ngIf="selectedOperator === 'om'"><ion-icon name="checkmark"></ion-icon></div>
-            <img src="assets/operators/orange-money-logo.png" alt="OM" />
-          </div>
-          <div class="operator-card" [class.selected]="selectedOperator === 'momo'" (click)="selectedOperator = 'momo'">
-            <div class="check-badge" *ngIf="selectedOperator === 'momo'"><ion-icon name="checkmark"></ion-icon></div>
-            <img src="assets/operators/mtn-momo-logo.png" alt="MoMo" />
+        <div class="field-group">
+          <label>Montant *</label>
+          <div class="amount-row">
+            <input type="tel" [(ngModel)]="sendAmount" placeholder="Entrer le montant" />
+            <span class="currency-tag">FCFA</span>
           </div>
         </div>
-        <p class="confirmation-name" *ngIf="selectedOperator">Nom confirmation : <strong>{{ confirmationName }}</strong></p>
+
+        <div class="operator-section">
+          <p class="operator-title"><ion-icon name="logo-usd" class="dollar-ico"></ion-icon> Choisit le moyen de payement</p>
+          <div class="operator-images">
+            <div class="op-img" [class.selected]="selectedOperator === 'om'" (click)="selectedOperator = 'om'">
+              <div class="op-check" *ngIf="selectedOperator === 'om'"><ion-icon name="checkmark"></ion-icon></div>
+              <img src="assets/operators/orange-money-logo.png" alt="OM" />
+            </div>
+            <div class="op-img" [class.selected]="selectedOperator === 'momo'" (click)="selectedOperator = 'momo'">
+              <div class="op-check" *ngIf="selectedOperator === 'momo'"><ion-icon name="checkmark"></ion-icon></div>
+              <img src="assets/operators/mtn-momo-logo.png" alt="MoMo" />
+            </div>
+          </div>
+          <p class="conf-name" *ngIf="selectedOperator">Nom confirmation : <strong>{{ confirmationName }}</strong></p>
+        </div>
+
+        <button class="btn-confirm" (click)="confirmSendMoney()">CONFIRMER</button>
+        <button class="btn-cancel" (click)="showSendMoney = false">ANNULER</button>
+        <p class="instruction">Après cela, suivez les instructions de l'opérateur</p>
       </div>
 
-      <ion-button expand="block" class="confirm-btn" (click)="confirmSendMoney()">CONFIRMER</ion-button>
-      <ion-button expand="block" fill="outline" class="cancel-btn" (click)="showSendMoney = false">ANNULER</ion-button>
-      <p class="instruction-text">Après cela, suivez les instructions de l'opérateur</p>
+      <!-- Bande africaine bottom -->
+      <div class="modal-band-bottom"><img src="assets/patterns/bande-africaine-footer.png" alt="" /></div>
     </div>
   </div>
 
